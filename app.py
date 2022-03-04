@@ -59,6 +59,9 @@ def api_attractions_id(attractionId):
             "longitude":result["longitude"],
             "images":images_new
         })
+        if connection_object.is_connected():
+            cursor.close()
+            connection_object.close()
         return jsonify({
                 "data":result_all
                 })
@@ -100,11 +103,17 @@ def api_ttractions():
                 "images":images_new
             })
         if  int(count_page) > input_page:
+            if connection_object.is_connected():
+                cursor.close()
+                connection_object.close()
             return  jsonify({
                 "data":result_all,
                 "nextPage":input_page+1
             })
         if int(count_page) == input_page:
+            if connection_object.is_connected():
+                cursor.close()
+                connection_object.close()
             return  jsonify({
                 "data":result_all,
                 "nextPage":"null"
@@ -138,11 +147,17 @@ def api_ttractions():
                 "images":images_new
             })
         if  int(count_page) > input_page:
+            if connection_object.is_connected():
+                cursor.close()
+                connection_object.close()
             return  jsonify({
                 "data":result_all,
                 "nextPage":input_page+1
             })
         if int(count_page) == input_page:
+            if connection_object.is_connected():
+                cursor.close()
+                connection_object.close()
             return  jsonify({
                 "data":result_all,
                 "nextPage":"null"
