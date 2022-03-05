@@ -59,6 +59,9 @@ def api_attractions_id(attractionId):
             "longitude":result["longitude"],
             "images":images_new
         })
+        if connection_object.is_connected():
+            cursor.close()
+            connection_object.close()
         return jsonify({
                 "data":result_all
                 })
