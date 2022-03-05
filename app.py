@@ -28,7 +28,7 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
-@app.route("/api/attractions/<attractionId>")
+@app.route("/api/attraction/<attractionId>")
 def api_attractions_id(attractionId):
     connection_object = connection_pool.get_connection()
     cursor = connection_object.cursor(dictionary=True)
@@ -38,7 +38,7 @@ def api_attractions_id(attractionId):
     if int(count_page) >= int(attractionId):
         cursor.execute("SELECT * FROM `taipei_attrs` WHERE `id`=%s",[attractionId])
         result=cursor.fetchone()
-        result_all=[]
+        # result_all=[]
         images_new=[]
         images=result["images"].split("https")
         if '' in images:
@@ -46,7 +46,7 @@ def api_attractions_id(attractionId):
         for n in range(len(images)):
             images_https = "https"+images[n]
             images_new.append(images_https)
-        result_all.append(
+        result_all=(
             {
             "id":result["id"],
             "name":result["name"],
@@ -59,9 +59,6 @@ def api_attractions_id(attractionId):
             "longitude":result["longitude"],
             "images":images_new
         })
-        if connection_object.is_connected():
-            cursor.close()
-            connection_object.close()
         return jsonify({
                 "data":result_all
                 })
