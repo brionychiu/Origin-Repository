@@ -1,6 +1,7 @@
 from flask import *
 from mysql.connector import pooling
 from flask import jsonify
+from flask_cors import CORS
 
 connection_pool = pooling.MySQLConnectionPool(pool_name="pynative_pool",
                                                   pool_size=5,
@@ -11,6 +12,8 @@ connection_pool = pooling.MySQLConnectionPool(pool_name="pynative_pool",
                                                   password='password123')
 
 app=Flask(__name__)
+CORS(app,resources={r"/api/*": {"origins": "*"}})
+
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config['JSON_SORT_KEYS'] = False
