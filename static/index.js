@@ -53,6 +53,7 @@ const keyword_btn = document.querySelector(".srh_attr_btn")
 keyword_btn.addEventListener("click" ,() =>{
   keyword_value=document.getElementById("keyword_value").value;
   let url=`http://54.198.160.161:3000/api/attractions?page=0&keyword=${keyword_value}`;
+  document.querySelector("main").innerHTML="";
   keywordFetch(url);
 })
 function keywordFetch(url){
@@ -65,13 +66,12 @@ function keywordFetch(url){
   return res.json();   
 })
 .then(result => { 
-  console.log(result)
+  // console.log(result)
   if(result.data.length == 0){
     document.querySelector("main").innerHTML="";
     document.querySelector("main").innerHTML="請搜尋其他關鍵字哦";
   }
   nextPage = result.nextPage;
-  document.querySelector("main").innerHTML="";
   appendContent(result);
 
 })
@@ -129,7 +129,7 @@ function loadMore(){
   if(nextPage == null || nextPage=="null"){
     return;
   }
-  if (keyword_value != undefined || keyword_value != null ){
+  if (keyword_value){
       let url=`http://54.198.160.161:3000/api/attractions?page=${nextPage}&keyword=${keyword_value}`;
       keywordFetch(url);
     }else{
