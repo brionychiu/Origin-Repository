@@ -268,7 +268,7 @@ footer {
         align-items: center;
     }
 }
-@media (max-width:369px){
+@media (max-width:374px){
     nav > .logo {
         grid-template-columns:150px auto ;
     }
