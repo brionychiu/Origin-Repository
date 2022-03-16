@@ -1,5 +1,6 @@
 let nextPage;
 let keyword_value;
+let pending;
 
 // initial load //
 window.onload=function(){
@@ -13,14 +14,8 @@ window.onload=function(){
     rootMargin: "0px",
     threshold: 0.5,
   };
-  //callback 函式：判斷 footer 進入 viewport 時 loadMore();
-  function handleIntersect(entries) {
-    if (entries[0].isIntersecting) {
-        loadMore();
-        }
-}
   // 製作鈴鐺：建立一個 intersection observer，帶入相關設定資訊
-  let observer = new IntersectionObserver(handleIntersect, options);
+  let observer = new IntersectionObserver(loadMore, options);
   observer.observe(footer);
 }
 
@@ -31,6 +26,7 @@ function load(page){
     loadFetch(url);
   }
 function loadFetch(url){
+  pending=true;
   fetch(url, {
     method:'GET',
     headers: {
@@ -57,6 +53,7 @@ keyword_btn.addEventListener("click" ,() =>{
   keywordFetch(url);
 })
 function keywordFetch(url){
+  pending=true;
   fetch(url, {method:'GET',
   headers: {
   'Content-Type':'application/json'
@@ -115,8 +112,11 @@ function appendContent(result){
           attra_detail.appendChild(attra_cat);
     
           all_items.appendChild(attra_detail);
+          console.log(result);
+          all_items.href = `/attraction/${result.data[i].id}`;
           main.appendChild(all_items);
         }
+      pending=false;
     }
     catch(error){
       console.log("bad request")
@@ -129,11 +129,12 @@ function loadMore(){
   if(nextPage == null || nextPage=="null"){
     return;
   }
-  if (keyword_value){
+  if (keyword_value && pending==false){
       let url=`http://54.198.160.161:3000/api/attractions?page=${nextPage}&keyword=${keyword_value}`;
       keywordFetch(url);
-    }else{
+    }else if(nextPage && pending==false){
       let url=`http://54.198.160.161:3000/api/attractions?page=${nextPage}`;
+      // console.log(pending);
       loadFetch(url);
     }
     // console.log("loadMore");
@@ -141,12 +142,6 @@ function loadMore(){
 
 }
 
-
-
-
-// if(nextPage==null ){
-//   observer.unobserve(document.querySelector("footer"));
-// }
 
 
 

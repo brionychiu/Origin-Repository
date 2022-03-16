@@ -102,7 +102,7 @@ header > .intro_bar > .intro > .search_bar > .srh_attr_btn {
     width: 60px;
     background-color: #448899;
     /* put the picture in box */
-    background-image: url(../static/icon_search.png);
+    background-image: url(../Images/icon_search.png);
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 0px 5px 5px 0px;
@@ -130,6 +130,7 @@ main > .attrs_all {
     background: #FFFFFF;
     border: 1px solid #e8e8e8;
     border-radius: 5px;
+    text-decoration:none;
 }
 main > .attrs_all > img {
     grid-row: 1/2;
