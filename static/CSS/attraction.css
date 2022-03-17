@@ -142,6 +142,12 @@ main > .top > .right_box > .booking > .booking_time{
 main > .top > .right_box > .booking > .booking_price{
     display: inline-flex;
 }
+main > .top > .right_box > .booking > .booking_time > .day_time{
+    accent-color: #448899;
+}
+main > .top > .right_box > .booking > .booking_time > .night_time{
+    accent-color: #448899;
+}
 main > .top > .right_box > .booking > button{
     width:154px;
     height: 36px;
