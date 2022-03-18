@@ -1,0 +1,289 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family:"Noto Sans TC";
+    margin: 0px;
+    justify-self: center;
+    
+}nav{
+    display: grid;
+    top:0;
+    grid-template-columns:auto minmax(300px,1200px) auto;
+    background-color:#FFFFFF;
+    height:54px;
+    position: sticky;
+    z-index: 4;
+    align-items:center;
+}
+nav > .logo {
+    grid-column: 2/3;
+    display: grid;
+    grid-template-columns:1fr 3fr ;
+
+    font-size: 30px;
+    color: #448899;
+    align-self: center;
+    padding-left: 5px;
+}
+nav > .logo >.top_bar {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column: 2/3;
+    justify-self: end;
+}
+nav > .logo > .top_bar > .item {
+    align-self: center;
+    margin: 0px 20px;
+    font-size:16px;
+    font-weight: normal;
+    color: #666666;
+}
+main{
+    display: grid;
+    grid-template-columns: auto minmax(300px,1200px) auto;
+    grid-template-rows: 406px auto;
+    margin-top: 40px;
+    justify-items: center;
+    color: #666666;;
+    letter-spacing: 3px;
+
+}
+main > .top{
+    grid-column: 2/3;
+    grid-row: 1/2;
+    display: inline-grid;
+    grid-template-columns: 504px 600px;
+    grid-gap:30px;
+    
+}
+main > .top > .left_box{
+    grid-column: 1/2;
+    border-radius: 5px;
+    height:406px;
+}
+main > .top > .left_box > .images{
+    width:100%;
+    aspect-ratio: 540/406;
+    object-fit: fill;
+    position: relative;
+    bottom:20px;
+    border-radius: 5px;
+    z-index: 1;
+}
+main > .top > .left_box > .left_arrow{
+    position:relative;
+    top: 200px;
+    left:20px;
+    z-index: 2;
+}
+main > .top > .left_box > .right_arrow{
+    position:relative;
+    bottom: 222px;
+    left:450px;
+    z-index: 3;
+}
+main > .top > .left_box > .fade{
+    z-index: 0;
+}
+main > .top > .left_box > .flow_dot{
+    display: flex;
+    justify-content: center;
+    position:relative;
+    z-index: 4;
+    bottom: 110px;
+}
+main > .top > .left_box > .flow_dot > p{
+    display:inline-block; 
+    margin-left: 5px;
+}
+main > .top > .left_box > .flow_dot > .black_dot{
+    width:12px;
+    height:12px;
+    border-radius: 10px;
+    background-color:Black;
+    border: solid 1px #FFFFFF;
+}
+main > .top > .left_box > .flow_dot > .white_dot{
+    width:12px;
+    height:12px;
+    border-radius: 10px;
+    background-color:#FFFFFF;
+}
+main > .top > .right_box{
+    grid-column: 2/3;
+    display: inline-grid;
+    grid-template-rows: 33px 22px 302px;
+    grid-gap:15px;
+    align-self: center;
+}
+main > .top > .right_box > .title{
+    grid-row: 1/2;
+    font-size: 24px;
+    font-weight: 700;
+    align-self: end;
+}
+main > .top > .right_box > .title_info{
+    grid-row: 2/3; 
+}
+main > .top > .right_box > .booking{
+    grid-row: 3/4;
+    display: grid;
+    background: #E8E8E8;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+
+}
+main > .top > .right_box > .booking > .booking_time{
+    display: inline-flex;
+}
+main > .top > .right_box > .booking > .booking_price{
+    display: inline-flex;
+}
+main > .top > .right_box > .booking > .booking_time > .day_time{
+    accent-color: #448899;
+}
+main > .top > .right_box > .booking > .booking_time > .night_time{
+    accent-color: #448899;
+}
+main > .top > .right_box > .booking > button{
+    width:154px;
+    height: 36px;
+    background-color: #448899;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 19px;
+    border: 0 none;
+}
+main > .bottom{
+    grid-column: 2/3;
+    grid-row: 2/3;
+    justify-self:start ;
+    line-height: 24px;
+}
+main > .bottom > hr {
+    max-width:1200px; 
+    border:1px solid #E8E8E8;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+main > .bottom > .description{
+    margin-bottom: 20px;
+}
+main > .bottom > .address{
+    margin-bottom: 20px;
+}
+main > .bottom > .trans{
+    margin-bottom: 20px;
+}
+footer {
+    display: grid;
+    height:104px;
+    /* margin-top:1300px; */
+    /* min-height: 104px; */
+    justify-items: center;
+    align-items: center;
+    background: #757575;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-top: 50px;
+}
+.text_2{
+    font-size: 16px;
+    font-weight: 700;
+}
+@media (max-width:1200px){ 
+    main > .top{
+        grid-template-columns: 378px 450px;
+    }
+    main > .top > .left_box > .images{
+        aspect-ratio: 378/406;
+    }
+    main > .top > .left_box > .right_arrow{
+        bottom: 248px;
+        left:327px;
+    }
+    main > .bottom{
+        margin:30px;
+    }
+}
+@media (max-width:900px){ 
+    main > .top{
+        grid-template-columns: 252px 300px;
+        grid-gap:15px;
+    }
+    main > .top > .left_box{
+        grid-column: 1/2;
+        border-radius: 5px;
+    }
+    main > .top > .left_box > .images{
+        aspect-ratio: 252/406;
+    }
+    main > .top > .left_box > .left_arrow{
+        width:25px;
+        height: 25px;
+        left:6px;
+    }
+    main > .top > .left_box > .right_arrow{
+        width:25px;
+        height: 25px;
+        left:220px;
+        bottom: 235px;
+    }
+    main > .top > .left_box > .flow_dot > .black_dot{
+        width:8px;
+        height:8px;
+    }
+    main > .top > .left_box > .flow_dot > .white_dot{
+        width:8px;
+        height:8px;
+    }
+    main > .top > .left_box > .flow_dot{
+        bottom: 100px;
+    }
+    main > .top > .right_box{
+        grid-template-rows: 70px 22px 302px;
+    }
+}
+@media (max-width:605px){ 
+    nav > .logo {
+        grid-template-columns:150px auto ;
+    }
+    nav > .logo >.top_bar > .item{
+        margin: 0px 10px;
+    }
+    main{
+        grid-template-columns: auto 360px auto;
+        grid-template-rows: 760px auto;
+        margin-top: 40px;;
+    }
+    main > .top{
+        grid-column: 2/3;
+        grid-row: 1/3;
+        grid-template-columns: 1fr;
+        grid-template-rows: 350px 410px;
+        grid-gap:30px;
+    }
+    main > .top > .left_box{
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+    main > .top > .left_box > .images{
+        aspect-ratio: 360/350;
+    }
+    main > .top > .left_box > .right_arrow{
+        left:327px;
+        bottom: 185px;
+    }
+    main > .top > .right_box{
+        grid-column: 1/2;
+        grid-row: 2/3;
+        margin:10px;
+    }
+    main > .bottom{
+        grid-row: 2/3;
+        margin:10px;
+    }
+}
