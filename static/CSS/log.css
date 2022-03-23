@@ -1,0 +1,149 @@
+.covering{
+    width:100vw;
+    height:100vh;
+    z-index: 5;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.4);
+    display:none;
+}
+.signout{
+    display: none;
+}
+
+/* signin */
+.signin_box{
+    width:340px;
+    min-height:275px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    display: grid;
+    grid-template-rows: 10px 265px max-content;  
+    position:fixed;
+    justify-self: center;
+    top: 80px;
+    z-index: 6;  
+    display:none; 
+}
+.signin_box > .signin_boxtop{
+    grid-row: 1/2;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+    border-radius: 6px 6px 0px 0px;
+}
+.signin_box > .signin_boxbottom{
+    grid-row: 2/4;
+    grid-template-rows: auto repeat(3,47px) max-content;
+    display:inline-grid;
+    grid-gap: 10px;
+    justify-items: center;
+    align-self: center;
+    margin-top: 15px;
+    margin-bottom: 15px;  
+}
+.signin_box > .signin_boxbottom > .signin_message{
+    grid-row: -1/-2;
+    font-size: 16px;
+    color: #666666;
+    font-weight: 400;
+}
+.signin_box > .signin_boxbottom > .signin_message > .error_signin{
+    color: red;
+    padding-bottom: 10px;
+    text-align: center;
+    display:none;
+}
+.signin_box > .signin_boxbottom > .signin_message > .changeTo_signup{
+    cursor: pointer;
+}
+
+/* signup  */
+.signup_box{
+    width:340px;
+    min-height:332px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    display: grid;
+    grid-template-rows: 10px 322px max-content;
+    position:fixed;
+    justify-self: center;
+    top: 80px;
+    z-index: 6;
+    display:none;
+}
+.signup_box > .signup_boxtop{
+    grid-row: 1/2;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+    border-radius: 6px 6px 0px 0px;
+}
+.signup_box > .signup_boxbottom{
+    grid-row: 2/4;
+    grid-template-rows: auto repeat(4,47px) max-content;
+    display:inline-grid;
+    grid-gap: 10px;
+    justify-items: center;
+    align-self: center;
+    margin-top: 15px;
+    margin-bottom: 15px;  
+}
+.signup_box > .signup_boxbottom > .sigup_message{
+    grid-row: -1/-2;
+    font-size: 16px;
+    color: #666666;
+    font-weight: 400;
+
+}
+.signup_box > .signup_boxbottom > .sigup_message > .repeat_signup{
+    color: red;
+    padding-bottom: 10px;
+    text-align: center;
+    display:none;
+}
+.signup_box > .signup_boxbottom > .sigup_message > .success_signup{
+    color: red;
+    padding-bottom: 10px;
+    text-align: center;
+    display:none;
+}
+.signup_box > .signup_boxbottom > .sigup_message > .changeTo_signin{
+    cursor: pointer;
+}
+
+/*  common use */
+.text_3{
+    grid-row: 1/2;
+    font-weight: 700;
+    font-size: 24px;   
+    color: #666666;
+}
+.icon_close{
+    position: absolute;
+    left:310px;
+    background-image: url(../Images/icon_close.png);
+    background-color: #FFFFFF;
+    border: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    width:16px;
+    height:16px;
+}
+.sign_input{
+    width:310px;
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.sign_btn{
+    width:310px;
+    background: #448899;
+    border-radius: 5px; 
+    border: none;
+    padding: 10px;
+    font-size: 19px;
+    font-weight: 400;
+    font-family: 'Noto Sans TC';
+    color: #FFFFFF;
+    cursor: pointer;
+}

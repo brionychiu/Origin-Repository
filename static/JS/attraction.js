@@ -5,6 +5,7 @@ let id = url.split("attraction/")[1];
 // initial load //
 window.onload = function(){
     load(id);
+    checkUser();
 }
 
 // load page

@@ -5,6 +5,7 @@ body {
     font-family:"Noto Sans TC";
     margin: 0px;
     justify-self: center;
+    display: grid;
     
 }nav{
     display: grid;
@@ -15,12 +16,16 @@ body {
     position: sticky;
     z-index: 4;
     align-items:center;
+    border: 1px solid #e8e8e8;
+}
+a[href="/"] {
+    text-decoration: none;
+    color: #448899;
 }
 nav > .logo {
     grid-column: 2/3;
     display: grid;
     grid-template-columns:1fr 3fr ;
-
     font-size: 30px;
     color: #448899;
     align-self: center;
@@ -38,6 +43,7 @@ nav > .logo > .top_bar > .item {
     font-size:16px;
     font-weight: normal;
     color: #666666;
+    cursor: pointer;
 }
 main{
     display: grid;
@@ -76,12 +82,14 @@ main > .top > .left_box > .left_arrow{
     top: 200px;
     left:20px;
     z-index: 2;
+    opacity: 0.75;
 }
 main > .top > .left_box > .right_arrow{
     position:relative;
     bottom: 222px;
     left:450px;
     z-index: 3;
+    opacity: 0.75;
 }
 main > .top > .left_box > .fade{
     z-index: 0;
@@ -148,6 +156,10 @@ main > .top > .right_box > .booking > .booking_time > .day_time{
 main > .top > .right_box > .booking > .booking_time > .night_time{
     accent-color: #448899;
 }
+input[type="radio"]{
+    width: 18px;
+    height: 18px;
+}
 main > .top > .right_box > .booking > button{
     width:154px;
     height: 36px;
@@ -156,6 +168,7 @@ main > .top > .right_box > .booking > button{
     color: #FFFFFF;
     font-size: 19px;
     border: 0 none;
+    cursor: pointer;
 }
 main > .bottom{
     grid-column: 2/3;
@@ -250,7 +263,7 @@ footer {
     }
 
 }
-@media (max-width:605px){ 
+@media (max-width:607px){ 
     nav > .logo {
         grid-template-columns:150px auto ;
     }
