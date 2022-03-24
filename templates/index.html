@@ -5,18 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&amp;display=swap" rel="stylesheet">
     <title>台北一日遊</title>
-    <link rel="stylesheet" type="text/css" href="../static/CSS/index.css" media="all" /> 
-
+    <link rel="stylesheet" type="text/css" href="../static/CSS/index.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../static/CSS/log.css" media="all" /> 
+    
 </head>
 <body>
+    <div class="covering"></div>
     <nav>
-        <strong class="logo">台北一日遊
+        <strong class="logo"><a href="/">台北一日遊</a>
             <div class="top_bar">
                 <div class="item"><a>預定行程</a></div>
-                <div class="item"><a>登入/註冊</a></div>
+                <div class="item signin">登入/註冊</div>
+                <div class="item signout">登出系統</div>
             </div>
         </strong>  
     </nav>
+    <div class="signin_box">
+        <div class="signin_boxtop"></div>
+        <div class="signin_boxbottom">
+            <div class="text_3">登入會員帳號</div>
+            <button  class="icon_close"></button>
+            <input class="sign_input" type="text" placeholder="輸入電子郵件" name="usermail"/>
+            <input class="sign_input" type="password" placeholder="輸入密碼" name="password"/>
+            <button class="sign_btn signin_btn">登入帳戶</button> 
+            <div class="signin_message">
+                <div class="error_signin">帳號或密碼錯誤</div>
+                <div class="changeTo_signup">還沒有帳戶？點此註冊</div>
+            </div>
+        </div>
+    </div>
+    <div class="signup_box">
+        <div class="signup_boxtop"></div>
+        <div class="signup_boxbottom">
+            <div class="text_3">註冊會員帳號</div>
+            <button  class="icon_close"></button>
+            <input class="sign_input" type="text" placeholder="輸入姓名" name="username"/>
+            <input class="sign_input" type="text" placeholder="輸入電子郵件" name="usermail"/>
+            <input class="sign_input" type="password" placeholder="輸入密碼" name="password"/>
+            <button class="sign_btn signup_btn">註冊新帳戶</button>
+            <div class="sigup_message">
+                <div class="repeat_signup"></div>
+                <div class="success_signup">註冊成功</div>
+                <div class="changeTo_signin">已經有帳戶了？點此登入</div>
+            </div>
+        </div>
+    </div>
     <header>
         <div class="intro_bar">
             <div class="intro">
@@ -44,4 +77,5 @@
     <footer>COPYRIGHT © 2021 台北一日遊</footer>
 </body>
 <script src="../static/JS/index.js"></script>
+<script src="../static/JS/log.js"></script>
 </html>
