@@ -17,7 +17,6 @@ window.onload=function(){
   // 製作鈴鐺：建立一個 intersection observer，帶入相關設定資訊
   let observer = new IntersectionObserver(loadMore, options);
   observer.observe(footer);
-
   // initial load -- check user/api GET //
   checkUser();
 }
@@ -115,7 +114,6 @@ function appendContent(result){
           attra_detail.appendChild(attra_cat);
     
           all_items.appendChild(attra_detail);
-          console.log(result);
           all_items.href = `/attraction/${result.data[i].id}`;
           main.appendChild(all_items);
         }

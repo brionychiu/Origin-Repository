@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&amp;display=swap" rel="stylesheet">
+    <title>訂購導覽行程</title>
+    <link rel="stylesheet" type="text/css" href="../static/CSS/booking.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../static/CSS/log.css" media="all" />  
+
+</head>
+<body>
+    <div class="covering"></div>
+    <nav>
+        <strong class="logo"><a href="/">台北一日遊</a>
+            <div class="top_bar">
+                <div class="item"><a class="nav_booking">預定行程</a></div>
+                <div class="item signin">登入/註冊</div>
+                <div class="item signout">登出系統</div>
+            </div>
+        </strong>  
+    </nav>
+    <div class="signin_box">
+        <div class="signin_boxtop"></div>
+        <div class="signin_boxbottom">
+            <div class="text_3">登入會員帳號</div>
+            <button  class="icon_close"></button>
+            <input class="sign_input" type="text" placeholder="輸入電子郵件" name="usermail"/>
+            <input class="sign_input" type="password" placeholder="輸入密碼" name="password"/>
+            <button class="sign_btn signin_btn">登入帳戶</button> 
+            <div class="signin_message">
+                <div class="error_signin">帳號或密碼錯誤</div>
+                <div class="changeTo_signup">還沒有帳戶？點此註冊</div>
+            </div>
+        </div>
+    </div>
+    <div class="signup_box">
+        <div class="signup_boxtop"></div>
+        <div class="signup_boxbottom">
+            <div class="text_3">註冊會員帳號</div>
+            <button  class="icon_close"></button>
+            <input class="sign_input" type="text" placeholder="輸入姓名" name="username"/>
+            <input class="sign_input" type="text" placeholder="輸入電子郵件" name="usermail"/>
+            <input class="sign_input" type="password" placeholder="輸入密碼" name="password"/>
+            <button class="sign_btn signup_btn">註冊新帳戶</button>
+            <div class="sigup_message">
+                <div class="repeat_signup"></div>
+                <div class="success_signup">註冊成功</div>
+                <div class="changeTo_signin">已經有帳戶了？點此登入</div>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="booking-1">
+            <div class="text_4">您好，<span class="booking-username"></span>，待預訂的行程如下：</div>
+            <div class="booking-1-box">
+                <img class="booking-image"/>
+                <div class="booking-1-box-right">
+                    <p>台北一日遊：<span class="booking-attr"></span></p>
+                    <button class="delete_btn"></button>
+                    <strong>日期：<span class="booking-date"></span></strong>
+                    <strong>時間：<span class="booking-time"></span></strong>
+                    <strong>費用：<span class="booking-price"></span></strong>
+                    <strong>地點：<span class="booking-address"></span></strong>
+                </div>
+            </div>
+        </div>
+        
+        <div class="booking-2">
+            <div class="booking-2-box">
+                <strong>您的聯絡資訊</strong>
+                <div>聯絡姓名：<input type="text"></input></div>
+                <div>連絡信箱：<input type="text"></input></div>
+                <div>手機號碼：<input type="tel"></input></div>
+                <strong>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</strong>
+            </div>
+        </div>
+        <div class="booking-3">
+            <div class="booking-3-box">
+                <strong>信用卡付款資訊</strong>
+                <div>卡片號碼：<input type="password"></input></div> 
+                <div>過期時間：<input type="datetime"></input></div>
+                <div>驗證密碼：<input type="text"></input></div>
+            </div>
+        </div>
+        <div class="booking-4">
+            <div class="booking-4-box">
+                <strong>總價：<span class="total-price">新台幣2000元</span></strong>
+                <br/>
+                <button class="booking_btn">確認訂購並付款</button>
+            </div>
+        </div>
+    </main>
+    <footer>COPYRIGHT © 2021 台北一日遊</footer>
+</body>
+<script src="../static/JS/log.js"></script>
+<script src="../static/JS/booking.js"></script>
+</html>

@@ -1,6 +1,10 @@
 // get url id //
 let url = location.href;
 let id = url.split("attraction/")[1];
+let attr_name;
+let choose_time = "day";
+let price;
+let attr_id = id;
 
 // initial load //
 window.onload = function(){
@@ -26,6 +30,7 @@ function loadFetch(url){
 .then(result => { 
     render(result);
     imagesRender(result);
+    attr_name = result.data.name;
     // console.log(result);
   })
 }
@@ -60,8 +65,10 @@ if (document.querySelector('input[name="time"]')) {
       elem.addEventListener("change", function(event) {
         let item = event.target.value;
         if(item == "night"){
+            choose_time = "night"
             document.querySelector(".price").innerHTML="新台幣 2500 元";
         }else{
+            choose_time = "day"
             document.querySelector(".price").innerHTML="新台幣 2000 元";
         };
       });
@@ -167,3 +174,45 @@ right_btn.addEventListener("click" ,() =>{
     }
     // console.log(image_number);
 })
+
+// click attraction.html start booking_btn //
+const start_booking_btn = document.querySelector(".start_booking_btn");
+start_booking_btn.addEventListener("click" ,() =>{
+    // if signin //
+    if(userstatus != null){
+        const booking_date = document.getElementById("choose_date").value
+        if(choose_time == "day"){
+            price = 2000;
+        }else{
+            price = 2500;
+        }
+        let booking_data={
+            "attractionId": Number(attr_id),
+            "date": booking_date,
+            "time": choose_time,
+            "price": price          
+            }
+        console.log(booking_data)
+        addNewBooking(booking_data);
+    }else{
+    // !signin //
+        press_navSign();
+        } 
+})
+// fetch- add new booking - POST //
+async function addNewBooking(booking_data) {
+    let url = `/api/booking`;
+    const response = await fetch(url,{
+        method:'POST',
+        body:JSON.stringify(booking_data),
+        headers: {
+        'Content-Type':'application/json'
+      }
+    })
+    const res = await response.json();
+    if(res.ok){
+        window.location.href="/booking";
+    }else{
+        window.alert(res.message)
+    }
+  }
