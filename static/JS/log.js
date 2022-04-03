@@ -14,33 +14,36 @@ const repeat_signup = document.querySelector(".repeat_signup")
 const success_signup = document.querySelector(".success_signup")
 let username;
 let usermail;
+let userstatus;
 let password;
 let user_url=`/api/user`;
 
+// render signin/out/up HTML //
+
 // check user signin/out //
-function checkUser(){
-    fetch(user_url, {
+async function checkUser(){
+    const response = await fetch(user_url,{
         method:'GET',
         headers: {
         'Content-Type':'application/json'
       }
-    })
-    .then(res => {
-        return res.json();   
-    })
-    .then(result => { 
-        if(result.data == null){
-            signout.style.display = "none";
-            signin.style.display = "block";
-        }else{
-            signout.style.display = "block";
-            signin.style.display = "none";
-        }
       })
+    const res = await response.json();
+    if(res.data == null){
+        signout.style.display = "none";
+        signin.style.display = "block";
+        userstatus = res.data;
+    }else{
+        signout.style.display = "block";
+        signin.style.display = "none";
+        username = res.data.name;
+        userstatus = true
+    }
 }
 
 // click nav 登入/註冊  //
-signin.addEventListener("click" ,() =>{
+signin.addEventListener("click", press_navSign , false);
+function press_navSign () {
     signin_box.style.display = "grid";
     signup_box.style.display = "none";
     covering.style.display = "block";
@@ -57,9 +60,7 @@ signin.addEventListener("click" ,() =>{
     // clear input value //
     document.getElementsByName("usermail")[0].value="";
     document.getElementsByName("password")[0].value="";
-
-    
-});
+};
 
 // press signin_btn //
 signin_btn.addEventListener("click" ,() =>{
@@ -166,7 +167,6 @@ signup_btn.addEventListener("click" ,() =>{
     })
     .then(result => { 
         if(result.ok == true){
-            console.log("ok");
             success_signup.style.display = "block";
             repeat_signup.style.display = "none";
             signout.style.display = "block";
@@ -194,6 +194,7 @@ signout.addEventListener("click" ,() =>{
         return res.json();   
     })
     .then(result => { 
+        console.log(result)
         if(result.ok == true){
             window.location.reload(); 
         }
@@ -210,3 +211,18 @@ function close_box(){
     signup_box.style.display = "none";
     covering.style.display = "none";
 };
+
+// click nav_booking //
+const nav_booking = document.querySelector(".nav_booking");
+nav_booking.addEventListener("click" ,() =>{
+    // if signin //
+    if(userstatus != null){
+        // window.location.assign("/booking");
+        window.location.href="/booking";
+    }else{
+        // !signin //
+        press_navSign();
+    }
+})
+
+
