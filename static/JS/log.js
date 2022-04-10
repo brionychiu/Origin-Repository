@@ -30,12 +30,10 @@ async function checkUser(){
       })
     const res = await response.json();
     if(res.data == null){
-        signout.style.display = "none";
         signin.style.display = "block";
         userstatus = res.data;
     }else{
         signout.style.display = "block";
-        signin.style.display = "none";
         username = res.data.name;
         userstatus = true
     }
@@ -62,49 +60,94 @@ function press_navSign () {
     document.getElementsByName("password")[0].value="";
 };
 
+//  check mail_rules //
+let mail_rules = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;   
+function test_mail(usermail) {
+      let mailOK = mail_rules.test(usermail);
+      if (!mailOK){
+        error_signin.style.display = "block";
+        error_signin.innerHTML="郵件格式錯誤";
+        repeat_signup.style.display = "block";
+        success_signup.style.display = "none";
+        repeat_signup.innerHTML="郵件格式錯誤";
+      }
+      else{
+        return mailOK
+      }
+    }
+
+//  check password_rules //
+let password_rules =  /[^a-zA-Z0-9]/;   
+function test_password(password) {
+      let passwordOK = password_rules.test(password);
+      if (passwordOK){
+        error_signin.style.display = "block";
+        error_signin.innerHTML="密碼不包含字符";
+        repeat_signup.style.display = "block";
+        success_signup.style.display = "none";
+        repeat_signup.innerHTML="密碼不包含字符";
+      }
+      else{
+        return !passwordOK
+      }  
+    }
+
 // press signin_btn //
 signin_btn.addEventListener("click" ,() =>{
     usermail = document.getElementsByName("usermail")[0].value;
     password = document.getElementsByName("password")[0].value;
-    // signin /api/user PATCH //
-    fetch(user_url, {
-        method:'PATCH',
-        body:JSON.stringify({"email":usermail,
-                            "password":password            
-        }),
-        headers: {
-        'Content-Type':'application/json'
-      }
-    })
-    .then(res => {
-        return res.json();   
-    })
-    .then(result => { 
-        if(result.ok == true){
-            // clear input value //
-            document.getElementsByName("usermail")[0].value="";
-            document.getElementsByName("password")[0].value="";
-            console.log("ok");
-            signout.style.display = "block";
-            signin.style.display = "none";
-            window.location.reload();
-
-        }else{
-            error_signin.style.display = "block";
-        }
-      })
-    console.log(usermail);
-    console.log(password);
+    if(!usermail){
+        error_signin.innerHTML="電子郵件未輸入"
+        error_signin.style.display = "block";
+        return;
+    }
+    else if(!password){
+        error_signin.innerHTML="密碼未輸入"
+        error_signin.style.display = "block";
+        return;
+    }
+    // check mail_rules & password_rules //
+    if(test_mail(usermail) && test_password(password)){
+        error_signin.style.display = "none";
+        // signin /api/user PATCH //
+        fetch(user_url, {
+            method:'PATCH',
+            body:JSON.stringify({"email":usermail,
+                                "password":password            
+            }),
+            headers: {
+            'Content-Type':'application/json'
+          }
+        })
+        .then(res => {
+            return res.json();   
+        })
+        .then(result => { 
+            if(result.ok == true){
+                // clear input value //
+                document.getElementsByName("usermail")[0].value="";
+                document.getElementsByName("password")[0].value="";
+                console.log("ok");
+                signout.style.display = "block";
+                signin.style.display = "none";
+                window.location.reload();
+    
+            }else{
+                error_signin.innerHTML="帳號或密碼錯誤"
+                error_signin.style.display = "block";
+            }
+          })
+    } 
 });
-
 
 //  還沒有帳戶？點此註冊_change to signup//
 change_signup.addEventListener("click",() =>{
     signup_box.style.display = "grid";
     signin_box.style.display = "none";
     covering.style.display = "block";
-    // clear signin error message //
+    // clear signin/up error message //
     error_signin.style.display = "none";
+    repeat_signup.style.display = "none";
     // clear input value //
     document.getElementsByName("usermail")[0].value="";
     document.getElementsByName("password")[0].value="";
@@ -128,7 +171,6 @@ signup_btn.addEventListener("click" ,() =>{
     username = document.getElementsByName("username")[0].value;
     usermail = document.getElementsByName("usermail")[1].value;
     password = document.getElementsByName("password")[1].value;
-    // clean input value //
     if(!username){
         repeat_signup.style.display = "block";
         success_signup.style.display = "none";
@@ -145,13 +187,9 @@ signup_btn.addEventListener("click" ,() =>{
         repeat_signup.innerHTML="密碼未輸入";
         return;
     }
-    document.getElementsByName("username")[0].value="";
-    document.getElementsByName("usermail")[1].value="";
-    document.getElementsByName("password")[1].value="";
-    console.log(username);
-    console.log(usermail);
-    console.log(password);
-    // signup /api/user POST //
+    // check mail_rules & password_rules //
+    if(test_mail(usermail) && test_password(password)){
+            // signup /api/user POST //
     fetch(user_url, {
         method:'POST',
         body:JSON.stringify({"name":username,
@@ -171,6 +209,10 @@ signup_btn.addEventListener("click" ,() =>{
             repeat_signup.style.display = "none";
             signout.style.display = "block";
             signin.style.display = "none";
+            // clear input value //
+            document.getElementsByName("username")[0].value="";
+            document.getElementsByName("usermail")[1].value="";
+            document.getElementsByName("password")[1].value="";
         }else{
             success_signup.style.display = "none";
             repeat_signup.style.display = "block";
@@ -178,10 +220,12 @@ signup_btn.addEventListener("click" ,() =>{
             repeat_signup.innerHTML="此電子郵件已重複註冊";
         }
       })
+    }
 });
+
 //  press signout_btn //
 signout.addEventListener("click" ,() =>{
-    signout.style.display = "none";
+    // signout.style.display = "none";
     signin.style.display = "block";
     //  signout /api/user DELETE //
     fetch(user_url, {
@@ -225,4 +269,12 @@ nav_booking.addEventListener("click" ,() =>{
     }
 })
 
-
+// press alert_close_btn (完成)//
+const alert_close_btn = document.querySelector(".alert_close_btn");
+alert_close_btn.addEventListener("click", close_alert , false);
+function close_alert(){
+    document.querySelector(".alert_box").style.display = "none";
+    if(document.querySelector(".giphy-embed").style.display == "grid"){
+        document.querySelector(".giphy-embed").style.display = "none";
+    }
+}

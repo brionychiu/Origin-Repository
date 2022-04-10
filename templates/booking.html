@@ -50,6 +50,12 @@
             </div>
         </div>
     </div>
+    <iframe src="https://giphy.com/embed/IMIrV2M2nG4LcCu3nQ" width="300" height="150" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    <div class="alert_box">
+        <div class="alert_boxtop"></div>
+        <div class="alert_text"></div>
+        <button class="alert_close_btn">完成</button>
+    </div>
     <main>
         <div class="booking-1">
             <div class="text_4">您好，<span class="booking-username"></span>，待預訂的行程如下：</div>
@@ -69,18 +75,18 @@
         <div class="booking-2">
             <div class="booking-2-box">
                 <strong>您的聯絡資訊</strong>
-                <div>聯絡姓名：<input type="text"></input></div>
-                <div>連絡信箱：<input type="text"></input></div>
-                <div>手機號碼：<input type="tel"></input></div>
-                <strong>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</strong>
+                <div>聯絡姓名：<input type="text" id="contact_name"></input></div>
+                <div>連絡信箱：<input type="text" id="contact_mail"></input></div>
+                <div>手機號碼：<input type="tel" id="contact_phone"></input></div>
+                <strong><a href="/thankyou"></a>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</strong>
             </div>
         </div>
         <div class="booking-3">
             <div class="booking-3-box">
                 <strong>信用卡付款資訊</strong>
-                <div>卡片號碼：<input type="password"></input></div> 
-                <div>過期時間：<input type="datetime"></input></div>
-                <div>驗證密碼：<input type="text"></input></div>
+                <div><span>卡片號碼：</span><div id="card-input"></div></div> 
+                <div><span>過期時間：</span><div id="expiration-input"></div></div>
+                <div><span>驗證密碼：</span><div id="CVV-input"></div></div>
             </div>
         </div>
         <div class="booking-4">
@@ -93,6 +99,7 @@
     </main>
     <footer>COPYRIGHT © 2021 台北一日遊</footer>
 </body>
+<script src="https://js.tappaysdk.com/tpdirect/v5.8.0"></script>
 <script src="../static/JS/log.js"></script>
 <script src="../static/JS/booking.js"></script>
 </html>

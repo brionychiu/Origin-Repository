@@ -181,6 +181,12 @@ start_booking_btn.addEventListener("click" ,() =>{
     // if signin //
     if(userstatus != null){
         const booking_date = document.getElementById("choose_date").value
+        if(booking_date == ""){
+            document.querySelector(".alert_box").style.display = "grid";
+            document.querySelector(".alert_text").textContent = "請選擇日期";
+            alert_close_btn.addEventListener("click", close_alert , false);
+            return;
+        }
         if(choose_time == "day"){
             price = 2000;
         }else{
@@ -213,6 +219,9 @@ async function addNewBooking(booking_data) {
     if(res.ok){
         window.location.href="/booking";
     }else{
-        window.alert(res.message)
+        console.log(res.message)
+        document.querySelector(".alert_box").style.display = "grid";
+        document.querySelector(".alert_text").textContent = res.message;
+        alert_close_btn.addEventListener("click", close_alert , false);
     }
   }
