@@ -7,6 +7,15 @@ body {
   justify-self: center;
   display: grid;
 }
+.giphy-embed{
+  position: fixed;
+  justify-self: center;
+  transform: translateX(-50%);
+  z-index: 7;
+  cursor: default;
+  pointer-events: none;        
+  display: none;
+}
 main {
   display: grid;
   grid-template-rows: 337px 307px 268px 180px;
@@ -14,6 +23,7 @@ main {
   letter-spacing: 1px;
   padding-left: 10px;
   padding-right: 10px;
+  display: none;
 }
 main > .booking-1 {
   display: grid;
@@ -88,7 +98,6 @@ main > .booking-2 > .booking-2-box {
   align-self: center;
   row-gap: 20px;
 }
-
 main > .booking-3 {
   display: grid;
   grid-row: 3/4;
@@ -102,7 +111,6 @@ main > .booking-3 > .booking-3-box {
   display: grid;
   grid-column: 2/3;
   grid-row: 2/3;
-  align-self: center;
   row-gap: 20px;
 }
 main > .booking-4 {
@@ -139,6 +147,7 @@ footer {
   color: #ffffff;
   font-size: 16px;
   margin-top: 50px;
+  display: none;
 }
 
 /* without order html */
@@ -148,6 +157,7 @@ footer {
   grid-template-rows: 216px auto;
 }
 .footer_cover{
+  grid-row: 2/3;
   display: grid;
   justify-items: center;
   font-size: 16px;
@@ -161,19 +171,34 @@ footer {
   padding-bottom: 400px;
 }
 .no_order{
-  grid-row: 2/3;
   grid-column: 2/3;
   color: #666666;
   font-size: 16px;
 }
 /* common use */
-input {
+.booking-3 > .booking-3-box > div > span{
+  position: relative;
+  bottom: 14px;
+}
+input{
   width: 200px;
   height: 38px;
   border: 1px solid #e8e8e8;
+  padding-left: 10px;
   border-radius: 5px;
   color: #757575;
   font-size: 16px;
+}
+/* tappay */
+#card-input , #expiration-input , #CVV-input{
+  width: 200px;
+  height: 38px;
+  border: 1px solid #e8e8e8;
+  padding-left: 10px;
+  border-radius: 5px;
+  color: #757575;
+  font-size: 16px;
+  display: inline-block;
 }
 /* RWD */
 @media (max-width: 607px) {

@@ -5,6 +5,7 @@ from member.member import member
 from attraction.attraction import attraction
 from error.error import error
 from booking.booking import booking
+from order.order import order
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -18,6 +19,7 @@ app.register_blueprint(member)
 app.register_blueprint(attraction)
 app.register_blueprint(error)
 app.register_blueprint(booking)
+app.register_blueprint(order)
 
 
 # Pages

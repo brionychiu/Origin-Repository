@@ -61,6 +61,8 @@ def api_booking():
 def api_newBooking():
     try:
         if "usermail" in session:
+            connection_object = connection_pool.get_connection()
+            cursor = connection_object.cursor(dictionary=True)
             booking_info = session["booking_info"]
             member_id = session["userid"]
             data = request.get_json()
@@ -81,14 +83,12 @@ def api_newBooking():
                         "error": True,
                         "message": "Missing booking data."
                     })
-            connection_object = connection_pool.get_connection()
-            cursor = connection_object.cursor(dictionary=True)
             # delete old order
             cursor.execute(
                 "DELETE FROM `taipeitrip_booking` WHERE `member_id`=%s", [member_id])
             connection_object.commit()
             result = cursor.fetchone()
-            # add new order (be the latest one)
+            # add new booking (be the latest one)
             insert = """INSERT INTO `taipeitrip_booking` (`member_id`,`date`,
                         `time`,`price`,`attr_id`,`attr_name`,`attr_address`,`attr_image`)
                         VALUES (%s,%s,%s,%s,%s,%s,%s,%s);"""
