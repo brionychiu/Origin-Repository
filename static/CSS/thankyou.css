@@ -1,16 +1,25 @@
 * {
     box-sizing: border-box;
   }
-  body {
+body {
     font-family: "Noto Sans TC";
     margin: 0px;
     justify-self: center;
     display: grid;
   }
+.giphy-embed{
+    position: fixed;
+    justify-self: center;
+    transform: translateX(-50%);
+    z-index: 7;
+    cursor: default;
+    pointer-events: none;        
+    display: none;
+  }
 main{
     display: grid;
     grid-template-columns: 1fr minmax(360px , 1200px) 1fr;
-    grid-template-rows: 337px 200px auto;
+    grid-template-rows: 300px 200px auto;
     letter-spacing: 2px;
     padding-left: 10px;
     padding-right: 10px;
@@ -45,6 +54,7 @@ main{
     grid-column: 1/2;
     width: 100%;
     aspect-ratio: 266/200;
+    border-radius: 5px;
 }
 .order-1 > .order-1-box > .order-info >.text-color{
     color: #448899;
@@ -72,18 +82,21 @@ main{
 .order-2 > div > span{
     font-weight: 400;
 }
-.backintro_btn{
+.order-3{
     grid-column: 2/3;
     grid-row: 3/4;
+    justify-self: center;
+}
+.order-3 > .backintro_btn ,.order-3 > .printorder_btn{
     width: 150px;
     height: 36px;
     background: #448899;
     border-radius: 5px;
     border: none;
+    margin: 0px 30px;
     color: #FFFFFF;
     text-align: center;
     font-size: 19px;
-    justify-self: center;
     cursor: pointer;
 }
 footer {
@@ -129,4 +142,18 @@ footer {
     .order-2{
         justify-self: start;
     }
+    .order-3 > .backintro_btn ,.order-3 > .printorder_btn{
+        margin: 0px 5px;
+    }
   }
+@media print{
+    * {
+        -webkit-print-color-adjust: exact !important;
+      }
+    .order-3 , footer{
+        display: none;
+      }
+}
+@page {
+    size:Landscape;
+    }

@@ -4,6 +4,11 @@ let orderNumber = order_url.split("=")[1];
 // initial load //
 window.onload = function(){
     checkOrder(orderNumber);
+    // show gif //
+    document.querySelector(".giphy-embed").style.display = "grid";
+    document.querySelector(".alert_box").style.display = "grid";
+    document.querySelector(".alert_text").textContent = "訂購成功，請記住訂單編號";
+    alert_close_btn.addEventListener("click", close_alert , false);
 }
 async function checkOrder(){
     await checkUser();
@@ -24,7 +29,7 @@ async function fetchGetOrder(orderNumber){
     })
     const res = await response.json();
         if(res.data){
-            console.log(res.data);
+            // console.log(res.data);
             renderOrder(res.data);
         }else{
             alert(res.message);
@@ -67,12 +72,17 @@ function renderOrder(result){
     contact_mail.textContent = result.contact.email;
 
     const contact_phone = document.querySelector(".contact-phone");
-    contact_phone.textContent = result.contact.phone;    
+    contact_phone.textContent = '0' + result.contact.phone;    
 }
 
 // click backintro_btn //
 const backintro_btn = document.querySelector(".backintro_btn");
 backintro_btn.addEventListener("click" ,() =>{
     window.location.href="/";
-})
+});
 
+// click printorder_btn //
+const printorder_btn = document.querySelector(".printorder_btn");
+printorder_btn.addEventListener("click" ,() =>{
+    window.print();
+});

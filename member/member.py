@@ -1,19 +1,14 @@
 from flask import *
-from mysql.connector import pooling
 from flask import jsonify
 from mysql.connector import Error
+import data.connector as connector
 
-connection_pool = pooling.MySQLConnectionPool(pool_name="pynative_pool",
-                                              pool_size=10,
-                                              pool_reset_session=True,
-                                              host='localhost',
-                                              database='website',
-                                              user='root',
-                                              password='password123')
 
 member = Blueprint("member", __name__,
                    static_folder="static",
                    template_folder="templates")
+
+trip_pool = connector.connect()
 
 # api user /  signup / POST
 
@@ -33,8 +28,8 @@ def api_user_signup():
                 "error": True,
                 "message": "註冊資料未完整輸入"
             })
-        connection_object = connection_pool.get_connection()
-        cursor = connection_object.cursor(dictionary=True)
+        cnx = trip_pool.get_connection()
+        cursor = cnx.cursor(dictionary=True)
         cursor.execute(
             "SELECT * FROM `taipeitrip_member` WHERE `email`=%s", [usermail])
         result = cursor.fetchone()
@@ -42,7 +37,7 @@ def api_user_signup():
             data = (username, usermail, password)
             insert = "INSERT INTO `taipeitrip_member` (`name`,`email`,`password`) VALUES (%s, %s,%s);"
             cursor.execute(insert, data)
-            connection_object.commit()
+            cnx.commit()
             return jsonify({
                 "ok": True
             })
@@ -54,9 +49,9 @@ def api_user_signup():
     except Error as e:
         print("Error", e)
     finally:
-        if (connection_object.is_connected()):
+        if (cnx.is_connected()):
             cursor.close()
-            connection_object.close()
+        cnx.close()
 
 # api user /  signin / PATCH
 
@@ -74,8 +69,8 @@ def api_user_signin():
                 "error": True,
                 "message": "登入資料未完整輸入"
             })
-        connection_object = connection_pool.get_connection()
-        cursor = connection_object.cursor(dictionary=True)
+        cnx = trip_pool.get_connection()
+        cursor = cnx.cursor(dictionary=True)
         cursor.execute(
             "SELECT * FROM `taipeitrip_member` WHERE `email`=%s AND `password`=%s;", [usermail, password])
         result = cursor.fetchone()
@@ -95,9 +90,9 @@ def api_user_signin():
     except Error as e:
         print("Error", e)
     finally:
-        if (connection_object.is_connected()):
+        if (cnx.is_connected()):
             cursor.close()
-            connection_object.close()
+        cnx.close()
 
 # api user / get user info / GET
 
@@ -126,7 +121,6 @@ def api_getuser():
 @member.route("/api/user", methods=["DELETE"])
 def api_user_signout():
     if "usermail" in session:
-        print(session)
         del session["usermail"]
         del session["userid"]
         del session["username"]

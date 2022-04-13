@@ -30,11 +30,14 @@ async function checkUser(){
       })
     const res = await response.json();
     if(res.data == null){
+        signout.style.display = "none";
         signin.style.display = "block";
         userstatus = res.data;
     }else{
+        signin.style.display = "none";
         signout.style.display = "block";
         username = res.data.name;
+        usermail = res.data.email;
         userstatus = true
     }
 }

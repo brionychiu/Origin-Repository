@@ -28,6 +28,9 @@ nav > .logo {
   align-self: center;
   padding-left: 5px;
 }
+nav > .logo :hover{
+  color: #4488;
+}
 nav > .logo > .top_bar {
   display: grid;
   grid-auto-flow: column;
@@ -55,9 +58,8 @@ nav > .logo > .top_bar > .item {
   display: none;
 }
 .signin {
-  display: none;
+  display: block;
 }
-
 /* signin */
 .signin_box {
   width: 340px;
@@ -65,13 +67,21 @@ nav > .logo > .top_bar > .item {
   background-color: #ffffff;
   box-shadow: 0px 4px 60px #aaaaaa;
   border-radius: 6px;
-  display: grid;
+  display:grid;
   grid-template-rows: 10px 265px max-content;
   position: fixed;
   justify-self: center;
-  top: 80px;
   z-index: 6;
   display: none;
+  animation: slide 1.5s forwards;
+}
+@keyframes slide {
+  from {
+    top: -10px;
+  }
+  to {
+    top: 90px;
+  }
 }
 .signin_box > .signin_boxtop {
   grid-row: 1/2;
@@ -166,9 +176,9 @@ nav > .logo > .top_bar > .item {
   grid-template-rows: 10px 4fr 1fr 10px;
   position: fixed;
   justify-self: center;
-  top: 80px;
   z-index: 6;
   display: none;
+  animation: slide 0.8s forwards;
 }
 .alert_box > .alert_boxtop{
   grid-row: 1/2;

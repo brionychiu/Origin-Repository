@@ -1,20 +1,18 @@
 import datetime
 import requests
+import os
 from flask import *
-from mysql.connector import pooling
-from flask import jsonify
 from mysql.connector import Error
+import data.connector as connector
+from dotenv import load_dotenv
 
-connection_pool = pooling.MySQLConnectionPool(pool_name="pynative_pool",
-                                              pool_size=10,
-                                              pool_reset_session=True,
-                                              host='localhost',
-                                              database='website',
-                                              user='root',
-                                              password='password123')
+load_dotenv()
+
 order = Blueprint("order", __name__,
                   static_folder="static",
                   template_folder="templates")
+
+trip_pool = connector.connect()
 
 # api orders / new order  / POST
 
@@ -33,9 +31,11 @@ def api_newOrders():
                     "error": True,
                     "message": "Missing order data."
                 })
+            # create order number
             time = datetime.datetime.now()
             time = time.strftime('%Y%m%d%H%M')
             order_number = time+str(member_id)
+
             attraction_id = data["order"]["trip"]["attraction"]["id"]
             attraction_image = data["order"]["trip"]["attraction"]["image"]
             order_date = data["order"]["trip"]["date"]
@@ -44,11 +44,11 @@ def api_newOrders():
             # TapPay request
             url = "https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
             headers = {'content-type': 'application/json',
-                       "x-api-key": 'partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM'}
+                       "x-api-key": os.getenv('x-api-key')}
             body = {
                 "prime": data["prime"],
-                "partner_key": 'partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM',
-                "merchant_id": "GlobalTesting_CTBC",
+                "partner_key": os.getenv('x-api-key'),
+                "merchant_id": os.getenv('merchant_id'),
                 "details": str(member_id) + "的" + order_number + "訂單",
                 "amount": order_price,
                 "cardholder": {
@@ -65,8 +65,8 @@ def api_newOrders():
                               attraction_id, attraction_image,
                               order_date, order_time, order_price,
                               contact_name, contact_mail, contact_phone]
-                connection_object = connection_pool.get_connection()
-                cursor = connection_object.cursor(dictionary=True)
+                cnx = trip_pool.get_connection()
+                cursor = cnx.cursor(dictionary=True)
 
                 # add new order
                 insert = """INSERT INTO `taipeitrip_order` (
@@ -76,13 +76,13 @@ def api_newOrders():
                             `contact_name`,`contact_mail`,`contact_phone`)
                             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"""
                 cursor.execute(insert, order_data)
-                connection_object.commit()
+                cnx.commit()
                 result = cursor.fetchone()
                 # delete old booking
                 cursor.execute(
                     "DELETE FROM `taipeitrip_booking` WHERE `member_id`=%s", [member_id])
-                connection_object.commit()
-                result = cursor.fetchone()
+                cnx.commit()
+                # result = cursor.fetchone()
                 return jsonify({
                     "data": {
                         "number": order_number,
@@ -105,9 +105,9 @@ def api_newOrders():
     except Error as e:
         print("Error", e)
     finally:
-        if (connection_object.is_connected()):
+        if (cnx.is_connected()):
             cursor.close()
-            connection_object.close()
+            cnx.close()
 
 # api order / order info / GET
 
@@ -117,8 +117,8 @@ def api_Order(orderNumber):
     try:
         if "usermail" in session:
             member_id = session["userid"]
-            connection_object = connection_pool.get_connection()
-            cursor = connection_object.cursor(dictionary=True)
+            cnx = trip_pool.get_connection()
+            cursor = cnx.cursor(dictionary=True)
             cursor.execute("""SELECT `name`,`address`,
             `attraction_id`,`attraction_image`,
             `order_date`,`order_time`,`order_price`,
@@ -166,6 +166,6 @@ def api_Order(orderNumber):
     except Error as e:
         print("Error", e)
     finally:
-        if (connection_object.is_connected()):
+        if (cnx.is_connected()):
             cursor.close()
-            connection_object.close()
+            cnx.close()
