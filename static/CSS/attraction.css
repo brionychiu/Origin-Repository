@@ -6,38 +6,6 @@ body {
     margin: 0px;
     justify-self: center;
     
-}nav{
-    display: grid;
-    top:0;
-    grid-template-columns:auto minmax(300px,1200px) auto;
-    background-color:#FFFFFF;
-    height:54px;
-    position: sticky;
-    z-index: 4;
-    align-items:center;
-}
-nav > .logo {
-    grid-column: 2/3;
-    display: grid;
-    grid-template-columns:1fr 3fr ;
-
-    font-size: 30px;
-    color: #448899;
-    align-self: center;
-    padding-left: 5px;
-}
-nav > .logo >.top_bar {
-    display: grid;
-    grid-auto-flow: column;
-    grid-column: 2/3;
-    justify-self: end;
-}
-nav > .logo > .top_bar > .item {
-    align-self: center;
-    margin: 0px 20px;
-    font-size:16px;
-    font-weight: normal;
-    color: #666666;
 }
 main{
     display: grid;
@@ -70,6 +38,15 @@ main > .top > .left_box > .images{
     bottom:20px;
     border-radius: 5px;
     z-index: 1;
+    animation:  fade 1s forwards;
+}
+@keyframes fade {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 2;
+  }
 }
 main > .top > .left_box > .left_arrow{
     position:relative;
@@ -162,6 +139,7 @@ main > .top > .right_box > .booking > button{
     color: #FFFFFF;
     font-size: 19px;
     border: 0 none;
+    cursor: pointer;
 }
 main > .bottom{
     grid-column: 2/3;

@@ -28,8 +28,8 @@ nav > .logo {
   align-self: center;
   padding-left: 5px;
 }
-nav > .logo :hover{
-  color: #4488;
+nav > .logo >a:hover{
+  color: #86aed6;
 }
 nav > .logo > .top_bar {
   display: grid;
@@ -45,6 +45,10 @@ nav > .logo > .top_bar > .item {
   color: #666666;
   cursor: pointer;
 }
+nav > .logo > .top_bar > .item:hover{
+  color: #4488;
+} 
+
 /* signin signout signup */
 .covering {
   width: 100vw;
@@ -59,6 +63,9 @@ nav > .logo > .top_bar > .item {
 }
 .signin {
   display: block;
+}
+.nav_member{
+  display: none;
 }
 /* signin */
 .signin_box {

@@ -18,7 +18,7 @@ app.config["JSON_AS_ASCII"] = False
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['JSON_SORT_KEYS'] = False
 app.secret_key = os.getenv('secret_key')
-print(os.getenv('secret_key'))
+
 # app.config['CORS_HEADERS'] = ['Content-Type':application/json]
 app.register_blueprint(member)
 app.register_blueprint(attraction)
@@ -46,6 +46,11 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
     return render_template("thankyou.html")
+
+
+@app.route("/member")
+def member():
+    return render_template("member.html")
 
 
 app.run(host="0.0.0.0", port=3000)

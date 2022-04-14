@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+  }
+body {
+    font-family: "Noto Sans TC";
+    margin: 0px;
+    justify-self: center;
+    display: grid;
+  }
+main{
+    display: grid;
+    grid-template-columns: 1fr minmax(360px , 1200px) 1fr;
+    grid-template-rows: 300px minmax(300px,max-content) auto;
+    letter-spacing: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+main> .member_top{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    grid-gap:80px;
+    align-items: center;
+    border-bottom: 1px solid #e8e8e8;
+}
+main> .member_top > .member_icon{
+    grid-column: 1/2;
+    justify-self: end;
+}
+main> .member_top > .member_icon > img{
+    width: 150px;
+    height:180px;
+    padding: 5px;
+    border:5px dashed #757575
+}
+main> .member_top > .member_info{
+    grid-column: 2/3;
+    font-size: 16px;
+    color: #757575;
+    text-align: left;   
+}
+main> .member_top > .member_info > div{
+    margin-top: 20px;
+    font-weight: bold;
+}
+main> .member_top > .member_info > div > span{
+    font-weight: 400;
+}
+main> .member_top > .member_info > .edit_btn{
+    width: 150px;
+    height: 36px;
+    margin-top: 40px;
+    background: #448899;
+    border-radius: 5px;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 19px;
+    cursor: pointer;
+}
+main> .member_bottom{
+    display: grid;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    color: #757575;
+    grid-gap:20px;
+}
+main> .member_bottom > strong{
+    margin-top: 30px;
+    font-size: 19px;
+    text-align: center;
+}
+main> .member_bottom > div{
+    font-weight: bold;
+}
+main> .member_bottom > div > span{
+    font-weight: 400;
+}
+main > .member_bottom > div >.goto_attr_btn{
+    width: 150px;
+    height: 30px;
+    margin-left: 10px;
+    background: #757575;
+    border-radius: 5px;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+main > .backintro_btn{
+    grid-column: 2/3;
+    grid-row: 3/4;
+    justify-self: center;
+    width: 150px;
+    height: 36px;
+    background: #448899;
+    border-radius: 5px;
+    border: none;
+    margin: 0px 30px;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 19px;
+    cursor: pointer;
+}
+footer {
+    display: grid;
+    height: 104px;
+    justify-items: center;
+    align-items: center;
+    background: #757575;
+    color: #ffffff;
+    font-size: 16px;
+    margin-top: 50px;
+  }

@@ -26,21 +26,32 @@ def api_newOrders():
             contact_name = data["order"]["contact"]["name"]
             contact_mail = data["order"]["contact"]["email"]
             contact_phone = data["order"]["contact"]["phone"]
-            if not contact_name or not contact_mail or not contact_phone:
-                return jsonify({
-                    "error": True,
-                    "message": "Missing order data."
-                })
-            # create order number
-            time = datetime.datetime.now()
-            time = time.strftime('%Y%m%d%H%M')
-            order_number = time+str(member_id)
-
             attraction_id = data["order"]["trip"]["attraction"]["id"]
             attraction_image = data["order"]["trip"]["attraction"]["image"]
             order_date = data["order"]["trip"]["date"]
             order_time = data["order"]["trip"]["time"]
             order_price = data["order"]["price"]
+
+            # create order number
+            time = datetime.datetime.now()
+            time = time.strftime('%Y%m%d%H%M')
+            order_number = time+str(member_id)
+
+            if not contact_name or not contact_mail or not contact_phone:
+                return jsonify({
+                    "error": True,
+                    "message": "Missing contact data."
+                })
+            if not attraction_id or not attraction_image:
+                return jsonify({
+                    "error": True,
+                    "message": "Missing attraction data."
+                })
+            if not order_date or not order_time or not order_price:
+                return jsonify({
+                    "error": True,
+                    "message": "Missing order data."
+                })
             # TapPay request
             url = "https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
             headers = {'content-type': 'application/json',
@@ -77,7 +88,7 @@ def api_newOrders():
                             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"""
                 cursor.execute(insert, order_data)
                 cnx.commit()
-                result = cursor.fetchone()
+                # result = cursor.fetchone()
                 # delete old booking
                 cursor.execute(
                     "DELETE FROM `taipeitrip_booking` WHERE `member_id`=%s", [member_id])
@@ -93,6 +104,7 @@ def api_newOrders():
                     }
                 })
             else:
+                cnx.rollback()
                 return jsonify({
                     "error": True,
                     "message": tappay_result["msg"]

@@ -20,9 +20,6 @@ def api_user_signup():
         username = data["name"]
         usermail = data["email"]
         password = data["password"]
-        print(username)
-        print(usermail)
-        print(password)
         if username == None or usermail == None or password == None:
             return jsonify({
                 "error": True,
@@ -62,8 +59,6 @@ def api_user_signin():
         data = request.get_json()
         usermail = data["email"]
         password = data["password"]
-        print(usermail)
-        print(password)
         if usermail == None or password == None:
             return jsonify({
                 "error": True,
@@ -129,3 +124,49 @@ def api_user_signout():
     return jsonify({
         "ok": True
     })
+
+# api member / order info / GET
+
+
+@member.route("/api/user/order")
+def api_user_order():
+    try:
+        if "usermail" in session:
+            userid = session["userid"]
+            cnx = trip_pool.get_connection()
+            cursor = cnx.cursor(dictionary=True)
+            cursor.execute(
+                """SELECT `attraction_id`,`name`,`order_number`,
+                `order_date`,`order_time`,
+                `contact_name`,`contact_phone`
+                FROM `taipeitrip_order` JOIN `taipei_attrs` 
+                ON `attraction_id` = `id`
+                WHERE `member_id`=%s""", [userid])
+            results = cursor.fetchall()
+            result_all = []
+            for result in results:
+                result_all.append(
+                    {
+                        "id": userid,
+                        "attraction_id": result["attraction_id"],
+                        "name": result["name"],
+                        "order_number": result["order_number"],
+                        "order_date": result["order_date"],
+                        "order_time": result["order_time"],
+                        "contact_name": result["contact_name"],
+                        "contact_phone": result["contact_phone"],
+                    })
+            return jsonify({
+                "data": result_all
+            })
+        else:
+            return jsonify({
+                "error": True,
+                "message": "Please sign in."
+            })
+    except Error as e:
+        print("Error", e)
+    finally:
+        if (cnx.is_connected()):
+            cursor.close()
+            cnx.close()

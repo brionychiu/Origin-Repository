@@ -12,6 +12,7 @@ const signup_btn = document.querySelector(".signup_btn");
 const error_signin = document.querySelector(".error_signin")
 const repeat_signup = document.querySelector(".repeat_signup")
 const success_signup = document.querySelector(".success_signup")
+const nav_member = document.querySelector(".nav_member")
 let username;
 let usermail;
 let userstatus;
@@ -31,11 +32,13 @@ async function checkUser(){
     const res = await response.json();
     if(res.data == null){
         signout.style.display = "none";
-        signin.style.display = "block";
+        nav_member.style.display = "none";
+        signin.style.display = "grid";
         userstatus = res.data;
     }else{
         signin.style.display = "none";
-        signout.style.display = "block";
+        signout.style.display = "grid";
+        nav_member.style.display = "grid";
         username = res.data.name;
         usermail = res.data.email;
         userstatus = true
@@ -243,6 +246,8 @@ signout.addEventListener("click" ,() =>{
     .then(result => { 
         console.log(result)
         if(result.ok == true){
+            signout.style.display = "none";
+            signin.style.display = "block";
             window.location.reload(); 
         }
       })
@@ -258,6 +263,17 @@ function close_box(){
     signup_box.style.display = "none";
     covering.style.display = "none";
 };
+// click nav_member // 
+nav_member.addEventListener("click" ,() =>{
+    // if signin //
+    if(userstatus != null){
+        // window.location.assign("/booking");
+        window.location.href="/member";
+    }else{
+        // !signin //
+        press_navSign();
+    }
+})
 
 // click nav_booking //
 const nav_booking = document.querySelector(".nav_booking");

@@ -69,7 +69,6 @@ def api_newBooking():
             attr_image = booking_info["image"]
             data = [member_id, input_date, input_time, input_price,
                     input_id, attr_name, attr_address, attr_image]
-            print(data)
             for info in data:
                 print(info)
                 if not info:
@@ -81,15 +80,15 @@ def api_newBooking():
             cursor.execute(
                 "DELETE FROM `taipeitrip_booking` WHERE `member_id`=%s", [member_id])
             cnx.commit()
-            result = cursor.fetchone()
+            # result = cursor.fetchone()
             # add new booking (be the latest one)
             insert = """INSERT INTO `taipeitrip_booking` (`member_id`,`date`,
                         `time`,`price`,`attr_id`,`attr_name`,`attr_address`,`attr_image`)
                         VALUES (%s,%s,%s,%s,%s,%s,%s,%s);"""
             cursor.execute(insert, data)
             cnx.commit()
-            result = cursor.fetchone()
-            print(result)
+            # result = cursor.fetchone()
+            # print(result)
             return jsonify({
                 "ok": True
             })
