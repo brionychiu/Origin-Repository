@@ -99,6 +99,9 @@ main{
     font-size: 19px;
     cursor: pointer;
 }
+.backintro_btn:hover , .printorder_btn:hover{
+    transform: translateY(3px);
+}
 footer {
     display: grid;
     height: 104px;

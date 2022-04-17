@@ -31,6 +31,11 @@ nav > .logo {
 nav > .logo >a:hover{
   color: #86aed6;
 }
+nav > .logo > .toggle{
+  width:60px;
+  height:44px;
+  display: none;
+}
 nav > .logo > .top_bar {
   display: grid;
   grid-auto-flow: column;
@@ -46,7 +51,7 @@ nav > .logo > .top_bar > .item {
   cursor: pointer;
 }
 nav > .logo > .top_bar > .item:hover{
-  color: #4488;
+  color: #86aed6;
 } 
 
 /* signin signout signup */
@@ -213,6 +218,9 @@ nav > .logo > .top_bar > .item:hover{
   color: #ffffff;
   cursor: pointer;
 }
+.alert_close_btn:hover{
+  transform: translateY(3px);
+}
 /*  common use */
 .text_3 {
   grid-row: 1/2;
@@ -265,7 +273,30 @@ a[href="/booking"] {
   nav > .logo {
     grid-template-columns: 150px auto;
   }
-  nav > .logo > .top_bar > .item {
-    margin: 0px 10px;
+  nav > .logo > .top_bar{
+    grid-template-rows: repeat(3,1fr);
+    width:115px;
+    height:150px;
+    background-color: #757575;
+    border-radius: 5px;
+    display: none;
   }
+  nav > .logo >.top_bar_x{
+    grid-template-rows: repeat(2,1fr);
+    height:100px;
+  }
+  /* .toggle:hover ~ .top_bar{
+    display: grid;
+  } */
+  nav > .logo > .top_bar > .item {
+    color: #FFFFFF;
+  }
+  nav > .logo > .toggle{
+    display: grid;
+    margin-right: 5px;
+    grid-column: 2/3;
+    justify-self: end;
+    cursor: pointer;
+  }
+
 }

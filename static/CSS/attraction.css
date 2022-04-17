@@ -131,7 +131,7 @@ input[type="radio"] {
     width: 18px;
     height: 18px;
   }
-main > .top > .right_box > .booking > button{
+main > .top > .right_box > .booking > .start_booking_btn{
     width:154px;
     height: 36px;
     background-color: #448899;
@@ -140,6 +140,10 @@ main > .top > .right_box > .booking > button{
     font-size: 19px;
     border: 0 none;
     cursor: pointer;
+}
+.start_booking_btn:hover{
+  transform: translateY(3px);
+  box-shadow: 2px 2px 6px 2px #F0FFF0;
 }
 main > .bottom{
     grid-column: 2/3;

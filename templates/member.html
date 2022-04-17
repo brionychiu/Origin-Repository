@@ -13,6 +13,7 @@
     <div class="covering"></div>
     <nav>
         <strong class="logo"><a href="/">台北一日遊</a>
+            <img  class="toggle" src="../static/Images/hamburger_icon.png" />
             <div class="top_bar">
                 <div class="item"><a class="nav_booking">預定行程</a></div>
                 <div class="item signin">登入/註冊</div>
@@ -21,30 +22,70 @@
             </div>
         </strong>  
     </nav>
+    <div class="signin_box">
+        <div class="signin_boxtop"></div>
+        <div class="signin_boxbottom">
+            <div class="text_3">登入會員帳號</div>
+            <button  class="icon_close"></button>
+            <input class="sign_input" type="text" placeholder="輸入電子郵件" name="usermail"/>
+            <input class="sign_input" type="password" placeholder="輸入密碼" name="password"/>
+            <button class="sign_btn signin_btn">登入帳戶</button> 
+            <div class="signin_message">
+                <div class="error_signin">帳號或密碼錯誤</div>
+                <div class="changeTo_signup">還沒有帳戶？點此註冊</div>
+            </div>
+        </div>
+    </div>
+    <div class="signup_box">
+        <div class="signup_boxtop"></div>
+        <div class="signup_boxbottom">
+            <div class="text_3">註冊會員帳號</div>
+            <button  class="icon_close"></button>
+            <input class="sign_input" type="text" placeholder="輸入姓名" name="username"/>
+            <input class="sign_input" type="text" placeholder="輸入電子郵件" name="usermail"/>
+            <input class="sign_input" type="password" placeholder="輸入密碼" name="password"/>
+            <button class="sign_btn signup_btn">註冊新帳戶</button>
+            <div class="sigup_message">
+                <div class="repeat_signup"></div>
+                <div class="success_signup">註冊成功</div>
+                <div class="changeTo_signin">已經有帳戶了？點此登入</div>
+            </div>
+        </div>
+    </div>
+    <div class="alert_box">
+        <div class="alert_boxtop"></div>
+        <div class="alert_text"></div>
+        <button class="alert_close_btn">完成</button>
+    </div>
     <main>
         <div class="member_top">
             <div class="member_icon"><img src="../static/Images/icon_member.jpg" /></div>
             <div class="member_info">
-                <div>使用者名稱：<span class="user_name"></span></div>
+                <div>使用者名稱：<span class="user_name"></span>
+                    <input type="text" placeholder="請輸入新名稱" class="new_username">
+                </div>
                 <div>帳號：<span class="user_mail"></span></div>
                 <div>密碼：<span class="user_password">********</span></div>
-                <button class="edit_btn">修改會員資料</button>
+                <button class="edit_btn">修改名稱資料</button>
+                <button class="save_btn">儲存名稱資料</button>
                 <!-- 點擊之後 要變成儲存會員資料 然後reload -->
             </div>
         </div>
         <div class="member_bottom">
             <strong>查看歷史訂單資料</strong>
-            <div>訂單編號：<span class="order_number"></span></div>
-            <div>景點名稱：<span class="attr_name"></span> <button class="goto_attr_btn">點我查看詳細資訊</button></div>
-            <div>日期：<span class="order_date"></span></div>
-            <div>時間：<span class="order_time"></span></div>
-            <div>聯絡人：<span class="contact_name"></span>  <span class="contact_phone"></span></div>
+            <!-- <div class="member_order_box">
+                <div class="member_order_bar">訂單編號：<span class="member_order_list"></span></div>
+                <div class="member_order_bar">景點名稱：<span class="member_order_list"></span><div> <a class="goto_attr_btn">點我查看詳細資訊</a></div>
+                <div class="member_order_bar">日期：<span class="member_order_list"></span></div>
+                <div class="member_order_bar">時間：<span class="member_order_list"></span></div>
+                <div class="member_order_bar">聯絡人：<span class="member_order_list"></span>  <span class="member_order_list contact_phone"></span></div>
+            </div> -->
         </div>
         <button class="backintro_btn">回首頁</button>
 
     </main>
     <footer>COPYRIGHT © 2021 台北一日遊</footer>
 </body>
-<script src="../static/JS/member.js"></script>
 <script src="../static/JS/log.js"></script>
+<script src="../static/JS/member.js"></script>
 </html>

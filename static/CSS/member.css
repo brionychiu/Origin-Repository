@@ -10,7 +10,7 @@ body {
 main{
     display: grid;
     grid-template-columns: 1fr minmax(360px , 1200px) 1fr;
-    grid-template-rows: 300px minmax(300px,max-content) auto;
+    grid-template-rows: 300px minmax(300px,auto) auto;
     letter-spacing: 2px;
     padding-left: 10px;
     padding-right: 10px;
@@ -47,7 +47,17 @@ main> .member_top > .member_info > div{
 main> .member_top > .member_info > div > span{
     font-weight: 400;
 }
-main> .member_top > .member_info > .edit_btn{
+main> .member_top > .member_info > div > .new_username{
+    width: 160px;
+    height: 35px;
+    border: 1px solid #e8e8e8;
+    padding-left: 10px;
+    border-radius: 5px;
+    color: #757575;
+    font-size: 16px;
+    display: none;
+}
+main> .member_top > .member_info > .edit_btn , .save_btn{
     width: 150px;
     height: 36px;
     margin-top: 40px;
@@ -59,51 +69,74 @@ main> .member_top > .member_info > .edit_btn{
     font-size: 19px;
     cursor: pointer;
 }
+main> .member_top > .member_info > .save_btn{
+    display: none;
+}
 main> .member_bottom{
     display: grid;
     grid-column: 2/3;
     grid-row: 2/3;
+    grid-template-rows: 80px auto;
     color: #757575;
-    grid-gap:20px;
 }
 main> .member_bottom > strong{
     margin-top: 30px;
     font-size: 19px;
     text-align: center;
 }
-main> .member_bottom > div{
-    font-weight: bold;
+main> .member_bottom > .member_order_box{
+    font-size: 16px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e8e8e8;
 }
-main> .member_bottom > div > span{
+main> .member_bottom > .member_order_box > .member_order_bar{
+    font-weight: bold;
+    margin:15px 0px;
+}
+main> .member_bottom > .member_order_box > .member_order_bar > .member_order_list{
     font-weight: 400;
 }
-main > .member_bottom > div >.goto_attr_btn{
-    width: 150px;
-    height: 30px;
+main > .member_bottom > .member_order_box > .member_order_bar >.goto_attr_btn{
+    padding: 3px 10px;
     margin-left: 10px;
-    background: #757575;
+    background: #BEBEBE;
     border-radius: 5px;
     border: none;
     color: #FFFFFF;
     text-align: center;
+    text-decoration: none;
     font-size: 14px;
+    font-weight: 400;
     cursor: pointer;
+}
+.goto_attr_btn:after {
+    content: "點我查看景點資訊";
+  }
+main > .member_bottom > .member_order_box >.member_order_bar >.contact_phone{
+    margin-left: 10px;
 }
 main > .backintro_btn{
     grid-column: 2/3;
     grid-row: 3/4;
     justify-self: center;
+    align-self: center;
     width: 150px;
     height: 36px;
     background: #448899;
     border-radius: 5px;
     border: none;
-    margin: 0px 30px;
+    margin-top: 50px;
     color: #FFFFFF;
     text-align: center;
     font-size: 19px;
     cursor: pointer;
 }
+.edit_btn:hover , .save_btn:hover ,.backintro_btn:hover{
+    transform: translateY(3px);
+}
+/* .goto_attr_btn:hover{
+    transform: translateY(3px); 
+} 動態js無法有hover嗎?*/
 footer {
     display: grid;
     height: 104px;
@@ -113,4 +146,44 @@ footer {
     color: #ffffff;
     font-size: 16px;
     margin-top: 50px;
+  }
+/* RWD */
+@media (max-width: 607px) {
+    main{
+        grid-template-rows: 500px minmax(300px,auto) auto;
+    }
+    main> .member_top{
+        grid-template-columns:1fr 360px 1fr;
+        grid-template-rows:300px 200px;
+        grid-gap:0px;
+        justify-items:center ;
+    }
+    main> .member_top > .member_icon {
+        justify-self:center;
+        grid-column: 2/3;
+        grid-row: 1/2;
+    }
+    main> .member_top > .member_icon > img {
+        width: 200px;
+        height: 240px;
+    }
+    main> .member_top > .member_info {
+        grid-column: 2/3;
+        grid-row: 2/3;
+    }
+    main> .member_top > .member_info > .edit_btn {
+        margin: 10px 0px 40px 0px;
+    }
+    main> .member_bottom > .member_order_box {
+        width: 360px;
+        display: grid;
+        justify-self: center;
+    }
+    main> .member_bottom > .member_order_box > .member_order_bar{
+        line-height: 35px;
+        margin:10px 0px;
+    }
+    .goto_attr_btn:after {
+        content: "點我";
+      }
   }

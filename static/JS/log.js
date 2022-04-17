@@ -13,6 +13,7 @@ const error_signin = document.querySelector(".error_signin")
 const repeat_signup = document.querySelector(".repeat_signup")
 const success_signup = document.querySelector(".success_signup")
 const nav_member = document.querySelector(".nav_member")
+const top_bar = document.querySelector(".top_bar");
 let username;
 let usermail;
 let userstatus;
@@ -34,6 +35,7 @@ async function checkUser(){
         signout.style.display = "none";
         nav_member.style.display = "none";
         signin.style.display = "grid";
+        top_bar.classList.add("top_bar_x")
         userstatus = res.data;
     }else{
         signin.style.display = "none";
@@ -277,7 +279,9 @@ nav_member.addEventListener("click" ,() =>{
 
 // click nav_booking //
 const nav_booking = document.querySelector(".nav_booking");
+
 nav_booking.addEventListener("click" ,() =>{
+    console.log("booking click")
     // if signin //
     if(userstatus != null){
         // window.location.assign("/booking");
@@ -297,3 +301,14 @@ function close_alert(){
         document.querySelector(".giphy-embed").style.display = "none";
     }
 }
+
+// toggle //
+const toggle = document.querySelector(".toggle");
+toggle.addEventListener("click",() =>{
+    if(top_bar.style.display == "grid"){
+        top_bar.style.display = "none"
+    }else{
+        top_bar.style.display = "grid"
+    }
+    
+})

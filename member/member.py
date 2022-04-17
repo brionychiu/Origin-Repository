@@ -16,6 +16,8 @@ trip_pool = connector.connect()
 @member.route("/api/user", methods=["POST"])
 def api_user_signup():
     try:
+        cnx = trip_pool.get_connection()
+        cursor = cnx.cursor(dictionary=True)
         data = request.get_json()
         username = data["name"]
         usermail = data["email"]
@@ -25,8 +27,6 @@ def api_user_signup():
                 "error": True,
                 "message": "註冊資料未完整輸入"
             })
-        cnx = trip_pool.get_connection()
-        cursor = cnx.cursor(dictionary=True)
         cursor.execute(
             "SELECT * FROM `taipeitrip_member` WHERE `email`=%s", [usermail])
         result = cursor.fetchone()
@@ -35,6 +35,7 @@ def api_user_signup():
             insert = "INSERT INTO `taipeitrip_member` (`name`,`email`,`password`) VALUES (%s, %s,%s);"
             cursor.execute(insert, data)
             cnx.commit()
+            print("ok")
             return jsonify({
                 "ok": True
             })
@@ -158,6 +159,43 @@ def api_user_order():
                     })
             return jsonify({
                 "data": result_all
+            })
+        else:
+            return jsonify({
+                "error": True,
+                "message": "Please sign in."
+            })
+    except Error as e:
+        print("Error", e)
+    finally:
+        if (cnx.is_connected()):
+            cursor.close()
+            cnx.close()
+
+# api member /  changeName / POST
+
+
+@member.route("/api/user/changeName", methods=["POST"])
+def api_user_changeName():
+    try:
+        if "usermail" in session:
+            userid = session["userid"]
+            data = request.get_json()
+            newname = data["newname"]
+            cnx = trip_pool.get_connection()
+            cursor = cnx.cursor(dictionary=True)
+            if newname == None:
+                return jsonify({
+                    "error": True,
+                    "message": "新名稱未輸入"
+                })
+            cursor.execute(
+                "UPDATE `taipeitrip_member` SET `name`=%s WHERE `id`=%s", [newname, userid])
+            cnx.commit()
+            del session["username"]
+            session["username"] = newname
+            return jsonify({
+                "ok": True
             })
         else:
             return jsonify({
