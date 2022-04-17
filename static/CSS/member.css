@@ -171,7 +171,7 @@ footer {
         grid-column: 2/3;
         grid-row: 2/3;
     }
-    main> .member_top > .member_info > .edit_btn {
+    main> .member_top > .member_info > .edit_btn ,.save_btn{
         margin: 10px 0px 40px 0px;
     }
     main> .member_bottom > .member_order_box {
