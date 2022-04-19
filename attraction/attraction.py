@@ -1,27 +1,21 @@
 from flask import *
-from mysql.connector import pooling
-from flask import jsonify
 from mysql.connector import Error
-
-connection_pool = pooling.MySQLConnectionPool(pool_name="pynative_pool",
-                                              pool_size=10,
-                                              pool_reset_session=True,
-                                              host='localhost',
-                                              database='website',
-                                              user='root',
-                                              password='password123')
+import data.connector as connector
 
 attraction = Blueprint("attraction", __name__,
                        static_folder="static",
                        template_folder="templates")
 
+trip_pool = connector.connect()
 
 # api attraction-id /  attraction page / GET
+
+
 @attraction.route("/api/attraction/<attractionId>")
 def api_attractions_id(attractionId):
     try:
-        connection_object = connection_pool.get_connection()
-        cursor = connection_object.cursor(dictionary=True)
+        cnx = trip_pool.get_connection()
+        cursor = cnx.cursor(dictionary=True)
         cursor.execute("SELECT COUNT(`id`) FROM `taipei_attrs`")
         count_page = cursor.fetchone()
         count_page = count_page["COUNT(`id`)"]
@@ -67,9 +61,9 @@ def api_attractions_id(attractionId):
     except Error as e:
         print("Error", e)
     finally:
-        if (connection_object.is_connected()):
+        if (cnx.is_connected()):
             cursor.close()
-            connection_object.close()
+            cnx.close()
 
 # api attractions / index page / GET
 
@@ -77,8 +71,8 @@ def api_attractions_id(attractionId):
 @attraction.route("/api/attractions")
 def api_ttractions():
     try:
-        connection_object = connection_pool.get_connection()
-        cursor = connection_object.cursor(dictionary=True)
+        cnx = trip_pool.get_connection()
+        cursor = cnx.cursor(dictionary=True)
         input_page = request.args.get("page")
         input_page = int(input_page)
         input_keyword = request.args.get("keyword")
@@ -164,6 +158,6 @@ def api_ttractions():
     except Error as e:
         print("Error", e)
     finally:
-        if (connection_object.is_connected()):
+        if (cnx.is_connected()):
             cursor.close()
-            connection_object.close()
+            cnx.close()

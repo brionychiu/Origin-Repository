@@ -1,19 +1,14 @@
 from flask import *
-from mysql.connector import pooling
 from flask import jsonify
 from mysql.connector import Error
+import data.connector as connector
 
-connection_pool = pooling.MySQLConnectionPool(pool_name="pynative_pool",
-                                              pool_size=10,
-                                              pool_reset_session=True,
-                                              host='localhost',
-                                              database='website',
-                                              user='root',
-                                              password='password123')
 
 member = Blueprint("member", __name__,
                    static_folder="static",
                    template_folder="templates")
+
+trip_pool = connector.connect()
 
 # api user /  signup / POST
 
@@ -21,20 +16,17 @@ member = Blueprint("member", __name__,
 @member.route("/api/user", methods=["POST"])
 def api_user_signup():
     try:
+        cnx = trip_pool.get_connection()
+        cursor = cnx.cursor(dictionary=True)
         data = request.get_json()
         username = data["name"]
         usermail = data["email"]
         password = data["password"]
-        print(username)
-        print(usermail)
-        print(password)
         if username == None or usermail == None or password == None:
             return jsonify({
                 "error": True,
                 "message": "註冊資料未完整輸入"
             })
-        connection_object = connection_pool.get_connection()
-        cursor = connection_object.cursor(dictionary=True)
         cursor.execute(
             "SELECT * FROM `taipeitrip_member` WHERE `email`=%s", [usermail])
         result = cursor.fetchone()
@@ -42,7 +34,8 @@ def api_user_signup():
             data = (username, usermail, password)
             insert = "INSERT INTO `taipeitrip_member` (`name`,`email`,`password`) VALUES (%s, %s,%s);"
             cursor.execute(insert, data)
-            connection_object.commit()
+            cnx.commit()
+            print("ok")
             return jsonify({
                 "ok": True
             })
@@ -54,9 +47,9 @@ def api_user_signup():
     except Error as e:
         print("Error", e)
     finally:
-        if (connection_object.is_connected()):
+        if (cnx.is_connected()):
             cursor.close()
-            connection_object.close()
+        cnx.close()
 
 # api user /  signin / PATCH
 
@@ -67,15 +60,13 @@ def api_user_signin():
         data = request.get_json()
         usermail = data["email"]
         password = data["password"]
-        print(usermail)
-        print(password)
         if usermail == None or password == None:
             return jsonify({
                 "error": True,
                 "message": "登入資料未完整輸入"
             })
-        connection_object = connection_pool.get_connection()
-        cursor = connection_object.cursor(dictionary=True)
+        cnx = trip_pool.get_connection()
+        cursor = cnx.cursor(dictionary=True)
         cursor.execute(
             "SELECT * FROM `taipeitrip_member` WHERE `email`=%s AND `password`=%s;", [usermail, password])
         result = cursor.fetchone()
@@ -95,9 +86,9 @@ def api_user_signin():
     except Error as e:
         print("Error", e)
     finally:
-        if (connection_object.is_connected()):
+        if (cnx.is_connected()):
             cursor.close()
-            connection_object.close()
+        cnx.close()
 
 # api user / get user info / GET
 
@@ -126,7 +117,6 @@ def api_getuser():
 @member.route("/api/user", methods=["DELETE"])
 def api_user_signout():
     if "usermail" in session:
-        print(session)
         del session["usermail"]
         del session["userid"]
         del session["username"]
@@ -135,3 +125,86 @@ def api_user_signout():
     return jsonify({
         "ok": True
     })
+
+# api member / order info / GET
+
+
+@member.route("/api/user/order")
+def api_user_order():
+    try:
+        if "usermail" in session:
+            userid = session["userid"]
+            cnx = trip_pool.get_connection()
+            cursor = cnx.cursor(dictionary=True)
+            cursor.execute(
+                """SELECT `attraction_id`,`name`,`order_number`,
+                `order_date`,`order_time`,
+                `contact_name`,`contact_phone`
+                FROM `taipeitrip_order` JOIN `taipei_attrs` 
+                ON `attraction_id` = `id`
+                WHERE `member_id`=%s""", [userid])
+            results = cursor.fetchall()
+            result_all = []
+            for result in results:
+                result_all.append(
+                    {
+                        "id": userid,
+                        "attraction_id": result["attraction_id"],
+                        "name": result["name"],
+                        "order_number": result["order_number"],
+                        "order_date": result["order_date"],
+                        "order_time": result["order_time"],
+                        "contact_name": result["contact_name"],
+                        "contact_phone": result["contact_phone"],
+                    })
+            return jsonify({
+                "data": result_all
+            })
+        else:
+            return jsonify({
+                "error": True,
+                "message": "Please sign in."
+            })
+    except Error as e:
+        print("Error", e)
+    finally:
+        if (cnx.is_connected()):
+            cursor.close()
+            cnx.close()
+
+# api member /  changeName / POST
+
+
+@member.route("/api/user/changeName", methods=["POST"])
+def api_user_changeName():
+    try:
+        if "usermail" in session:
+            userid = session["userid"]
+            data = request.get_json()
+            newname = data["newname"]
+            cnx = trip_pool.get_connection()
+            cursor = cnx.cursor(dictionary=True)
+            if newname == None:
+                return jsonify({
+                    "error": True,
+                    "message": "新名稱未輸入"
+                })
+            cursor.execute(
+                "UPDATE `taipeitrip_member` SET `name`=%s WHERE `id`=%s", [newname, userid])
+            cnx.commit()
+            del session["username"]
+            session["username"] = newname
+            return jsonify({
+                "ok": True
+            })
+        else:
+            return jsonify({
+                "error": True,
+                "message": "Please sign in."
+            })
+    except Error as e:
+        print("Error", e)
+    finally:
+        if (cnx.is_connected()):
+            cursor.close()
+            cnx.close()

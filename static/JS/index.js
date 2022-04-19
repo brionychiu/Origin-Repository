@@ -24,7 +24,7 @@ window.onload=function(){
 // load all attrs page // 
 
 function load(page){
-    let url=`http://54.198.160.161:3000/api/attractions?page=${page}`;
+    let url=`/api/attractions?page=${page}`;
     loadFetch(url);
   }
 function loadFetch(url){

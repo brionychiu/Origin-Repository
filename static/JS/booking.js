@@ -75,6 +75,12 @@ function renderBooking(result){
     const booking_image = document.querySelector(".booking-image");
     order_attr_image = result.attraction.image;
     booking_image.src = order_attr_image;
+
+    // render contact_name & mail //
+    const contact_name = document.querySelector("#contact_name");
+    contact_name.value = username;
+    const contact_mail = document.querySelector("#contact_mail");
+    contact_mail.value = usermail;
 }
 
 // click delete_btn //
@@ -91,7 +97,11 @@ delete_btn.addEventListener("click" ,() =>{
         return res.json();   
     })
     .then(result => {
-        window.alert("deleted!")
+        if(result.ok){
+            document.querySelector(".alert_box").style.display = "grid";
+            document.querySelector(".alert_text").textContent = "訂單資料已刪除";
+            alert_close_btn.addEventListener("click", close_alert , false);
+        }
     })
 })
 function noOrder(){
@@ -118,7 +128,7 @@ function noOrder(){
     main_cover.appendChild(booking_1);
     
 }
-//  check order phone_rules //
+// order phone_rules //
 let phone_rules = /^09[0-9]{8}$/;
 
 
@@ -168,11 +178,15 @@ TPDirect.card.setup({
         },
         // style focus state
         ':focus': {
+            'color': '#666666',
+            //'border' : '2px solid black',
+            //'background-color':'pink'
             // 這個東東是不是沒屁用啊!?
+            
         },
         // style valid state
         '.valid': {
-            'color': 'green'
+            'color': 'green',
         },
         // style invalid state
         '.invalid': {
@@ -282,14 +296,8 @@ function onSubmit(event) {
             alert_close_btn.addEventListener("click", close_alert , false);
             console.log('get prime error ' + result.msg);
             return;
-            
-            
         }
-        document.querySelector(".giphy-embed").style.display = "grid";
-        document.querySelector(".alert_box").style.display = "grid";
-        document.querySelector(".alert_text").textContent = "訂購成功";
-        alert_close_btn.addEventListener("click", close_alert , false);
-        console.log('get prime 成功，prime: ' + result.card.prime)
+        // console.log('get prime 成功，prime: ' + result.card.prime)
         order_body = {
             "prime": result.card.prime,
             "order": {
@@ -311,7 +319,6 @@ function onSubmit(event) {
                 }
             }
         }
-        console.log(order_body);
         addOrders();
 
         // send prime to your server, to pay with Pay by Prime API .
@@ -328,11 +335,11 @@ async function addOrders(){
         body: JSON.stringify(order_body),
       })
     const res = await response.json();
-    console.log(res);
     if(res.error){
         console.log(res.message);
         location.reload();
     }else{
+        // redirect
         window.location.href=`/thankyou?number=${res["data"]["number"]}`;
     }
 }

@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&amp;display=swap" rel="stylesheet">
-    <title>訂購導覽行程</title>
-    <link rel="stylesheet" type="text/css" href="../static/CSS/booking.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="../static/CSS/log.css" media="all" />  
-
+    <title>會員中心</title>
+    <link rel="stylesheet" type="text/css" href="../static/CSS/member.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../static/CSS/log.css" media="all" /> 
+    
 </head>
 <body>
     <div class="covering"></div>
@@ -20,7 +20,7 @@
                 <div class="item nav_member">會員中心</div>
                 <div class="item signout">登出系統</div>
             </div>
-        </strong>   
+        </strong>  
     </nav>
     <div class="signin_box">
         <div class="signin_boxtop"></div>
@@ -58,49 +58,34 @@
         <button class="alert_close_btn">完成</button>
     </div>
     <main>
-        <div class="booking-1">
-            <div class="text_4">您好，<span class="booking-username"></span>，待預訂的行程如下：</div>
-            <div class="booking-1-box">
-                <img class="booking-image"/>
-                <div class="booking-1-box-right">
-                    <p>台北一日遊：<span class="booking-attr"></span></p>
-                    <button class="delete_btn"></button>
-                    <strong>日期：<span class="booking-date"></span></strong>
-                    <strong>時間：<span class="booking-time"></span></strong>
-                    <strong>費用：<span class="booking-price"></span></strong>
-                    <strong>地點：<span class="booking-address"></span></strong>
+        <div class="member_top">
+            <div class="member_icon"><img src="../static/Images/icon_member.jpg" /></div>
+            <div class="member_info">
+                <div>使用者名稱：<span class="user_name"></span>
+                    <input type="text" placeholder="請輸入新名稱" class="new_username">
                 </div>
+                <div>帳號：<span class="user_mail"></span></div>
+                <div>密碼：<span class="user_password">********</span></div>
+                <button class="edit_btn">修改名稱資料</button>
+                <button class="save_btn">儲存名稱資料</button>
+                <!-- 點擊之後 要變成儲存會員資料 然後reload -->
             </div>
         </div>
-        
-        <div class="booking-2">
-            <div class="booking-2-box">
-                <strong>您的聯絡資訊</strong>
-                <div>聯絡姓名：<input type="text" id="contact_name"></input></div>
-                <div>連絡信箱：<input type="text" id="contact_mail"></input></div>
-                <div>手機號碼：<input type="tel" id="contact_phone"></input></div>
-                <strong><a href="/thankyou"></a>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</strong>
-            </div>
+        <div class="member_bottom">
+            <strong>查看歷史訂單資料</strong>
+            <!-- <div class="member_order_box">
+                <div class="member_order_bar">訂單編號：<span class="member_order_list"></span></div>
+                <div class="member_order_bar">景點名稱：<span class="member_order_list"></span><div> <a class="goto_attr_btn">點我查看詳細資訊</a></div>
+                <div class="member_order_bar">日期：<span class="member_order_list"></span></div>
+                <div class="member_order_bar">時間：<span class="member_order_list"></span></div>
+                <div class="member_order_bar">聯絡人：<span class="member_order_list"></span>  <span class="member_order_list contact_phone"></span></div>
+            </div> -->
         </div>
-        <div class="booking-3">
-            <div class="booking-3-box">
-                <strong>信用卡付款資訊</strong>
-                <div><span>卡片號碼：</span><div id="card-input"></div></div> 
-                <div><span>過期時間：</span><div id="expiration-input"></div></div>
-                <div><span>驗證密碼：</span><div id="CVV-input"></div></div>
-            </div>
-        </div>
-        <div class="booking-4">
-            <div class="booking-4-box">
-                <strong>總價：<span class="total-price">新台幣2000元</span></strong>
-                <br/>
-                <button class="booking_btn">確認訂購並付款</button>
-            </div>
-        </div>
+        <button class="backintro_btn">回首頁</button>
+
     </main>
     <footer>COPYRIGHT © 2021 台北一日遊</footer>
 </body>
-<script src="https://js.tappaysdk.com/tpdirect/v5.8.0"></script>
 <script src="../static/JS/log.js"></script>
-<script src="../static/JS/booking.js"></script>
+<script src="../static/JS/member.js"></script>
 </html>

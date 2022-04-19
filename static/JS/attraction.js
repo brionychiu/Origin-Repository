@@ -59,22 +59,6 @@ function render(result){
     trans.textContent = transport;
 }
 
-// select booking time & price //
-if (document.querySelector('input[name="time"]')) {
-    document.querySelectorAll('input[name="time"]').forEach((elem) => {
-      elem.addEventListener("change", function(event) {
-        let item = event.target.value;
-        if(item == "night"){
-            choose_time = "night"
-            document.querySelector(".price").innerHTML="新台幣 2500 元";
-        }else{
-            choose_time = "day"
-            document.querySelector(".price").innerHTML="新台幣 2000 元";
-        };
-      });
-    });
-  }
-
 // images flow //
 let image_number;
 let images_all;
@@ -172,8 +156,27 @@ right_btn.addEventListener("click" ,() =>{
     }else if(image_number == length-1){
         images.src=images_all[image_number]; 
     }
-    // console.log(image_number);
 })
+
+// select booking date -- set after taday //
+let today = new Date().toISOString().split('T')[0]; // 2022-04-11T07:39:27.915Z
+document.querySelector("#choose_date").setAttribute('min', today);
+
+// select booking time & price //
+if (document.querySelector('input[name="time"]')) {
+    document.querySelectorAll('input[name="time"]').forEach((elem) => {
+      elem.addEventListener("change", function(event) {
+        let item = event.target.value;
+        if(item == "night"){
+            choose_time = "night"
+            document.querySelector(".price").innerHTML="新台幣 2500 元";
+        }else{
+            choose_time = "day"
+            document.querySelector(".price").innerHTML="新台幣 2000 元";
+        };
+      });
+    });
+  }
 
 // click attraction.html start booking_btn //
 const start_booking_btn = document.querySelector(".start_booking_btn");

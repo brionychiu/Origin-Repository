@@ -28,6 +28,14 @@ nav > .logo {
   align-self: center;
   padding-left: 5px;
 }
+nav > .logo >a:hover{
+  color: #86aed6;
+}
+nav > .logo > .toggle{
+  width:60px;
+  height:44px;
+  display: none;
+}
 nav > .logo > .top_bar {
   display: grid;
   grid-auto-flow: column;
@@ -42,6 +50,10 @@ nav > .logo > .top_bar > .item {
   color: #666666;
   cursor: pointer;
 }
+nav > .logo > .top_bar > .item:hover{
+  color: #86aed6;
+} 
+
 /* signin signout signup */
 .covering {
   width: 100vw;
@@ -55,9 +67,11 @@ nav > .logo > .top_bar > .item {
   display: none;
 }
 .signin {
+  display: block;
+}
+.nav_member{
   display: none;
 }
-
 /* signin */
 .signin_box {
   width: 340px;
@@ -65,13 +79,21 @@ nav > .logo > .top_bar > .item {
   background-color: #ffffff;
   box-shadow: 0px 4px 60px #aaaaaa;
   border-radius: 6px;
-  display: grid;
+  display:grid;
   grid-template-rows: 10px 265px max-content;
   position: fixed;
   justify-self: center;
-  top: 80px;
   z-index: 6;
   display: none;
+  animation: slide 1.5s forwards;
+}
+@keyframes slide {
+  from {
+    top: -10px;
+  }
+  to {
+    top: 90px;
+  }
 }
 .signin_box > .signin_boxtop {
   grid-row: 1/2;
@@ -166,9 +188,9 @@ nav > .logo > .top_bar > .item {
   grid-template-rows: 10px 4fr 1fr 10px;
   position: fixed;
   justify-self: center;
-  top: 80px;
   z-index: 6;
   display: none;
+  animation: slide 0.8s forwards;
 }
 .alert_box > .alert_boxtop{
   grid-row: 1/2;
@@ -195,6 +217,9 @@ nav > .logo > .top_bar > .item {
   font-family: "Noto Sans TC";
   color: #ffffff;
   cursor: pointer;
+}
+.alert_close_btn:hover{
+  transform: translateY(3px);
 }
 /*  common use */
 .text_3 {
@@ -248,7 +273,30 @@ a[href="/booking"] {
   nav > .logo {
     grid-template-columns: 150px auto;
   }
-  nav > .logo > .top_bar > .item {
-    margin: 0px 10px;
+  nav > .logo > .top_bar{
+    grid-template-rows: repeat(3,1fr);
+    width:115px;
+    height:150px;
+    background-color: #757575;
+    border-radius: 5px;
+    display: none;
   }
+  nav > .logo >.top_bar_x{
+    grid-template-rows: repeat(2,1fr);
+    height:100px;
+  }
+  /* .toggle:hover ~ .top_bar{
+    display: grid;
+  } */
+  nav > .logo > .top_bar > .item {
+    color: #FFFFFF;
+  }
+  nav > .logo > .toggle{
+    display: grid;
+    margin-right: 5px;
+    grid-column: 2/3;
+    justify-self: end;
+    cursor: pointer;
+  }
+
 }
