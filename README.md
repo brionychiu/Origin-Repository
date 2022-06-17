@@ -21,7 +21,8 @@
 </p>
 
 ## Table of Content ##
-+ [Main Features](#main-features)
++ [Tech Stack](#tech-stack)
++ [Features](#features)
     + [Infinite Scroll](#scroll)
     + [Keyword Search](#keyword-search)
     + [Member System](#member-system)
@@ -31,9 +32,45 @@
     + [Python flask](#python-flask)
 + [Database](#database)
     + [MySQL](#MySQL)
-+ [Frontend Technique](#frontend)
-    + [RWD](#rwd)
 + [Cloud Service Technique](#cloud)
      + [AWS EC2](#ec2) 
++ [Frontend Technique](#frontend)
+    + [RWD](#rwd)
 + [Contact](#contact)
 
+<a name="tech-stack"></a>
+## Tech Stack
+
+
+<a name="features"></a>
+## Features
+<a name="scroll"></a>
++ Infinite Scroll
+<p>
+<p/>
+
+<a name="keyword-search"></a>
++ Keyword Search
+<p>
+<p/>
+
+<a name="member-system"></a>
++ Member System
+<p>
+<p/>
+
+<a name="image-carousel"></a>
++ Image carousel
+<p>
+<p/>
+
+<a name="tappay"></a>
++ third party online payment(TapPay)
+<p>
+<p/>
+
+## Backend Technique
+<a name="backend"></a>
++ 
+<p>
+<p/>
