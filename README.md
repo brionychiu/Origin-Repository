@@ -1,9 +1,9 @@
 # Taipei-Day-Trip 台北一日遊
 
-<h3 align="center">
+<h3>
   TaipeDay-Trip is a travel e-commerce website,<br/>
-  users can browse all attractions or search specific attraction, 
-  and booking a day tour in Taipei city. 
+  you can browse all attractions or search specific attraction, 
+  and make one-day tour reservations.
 </h3>
 
 # Demo
