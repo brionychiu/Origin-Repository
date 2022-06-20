@@ -68,7 +68,7 @@
 ### RWD
 + Support desktop, tablet, and mobile devices.
 <p>
-     <img src="" alt="infinite-scroll" width= "400" height = "250"/>
+   <img src="https://user-images.githubusercontent.com/94620926/174627568-6b2d05d5-3950-4aa9-ae76-5d5f1904442e.jpeg" alt="taipei_trip_RWD" width= "350" height = "250"/>
 <p/> 
 
 <a name="features"></a>
