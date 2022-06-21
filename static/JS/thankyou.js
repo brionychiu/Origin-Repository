@@ -3,6 +3,7 @@ let order_url = location.href;
 let orderNumber = order_url.split("=")[1];
 
 // initial load //
+const alert_close_btn = document.querySelector(".alert_close_btn");
 window.onload = function(){
     checkOrder(orderNumber);
     // show gif //
