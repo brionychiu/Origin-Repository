@@ -1,10 +1,8 @@
 # Taipei-Day-Trip 台北一日遊
 
-<h3>
-  TaipeDay-Trip is a travel e-commerce website,<br/>
-  you can browse all attractions or search specific attraction, 
-  and make one-day tour reservations.
-</h3>
+<p>
+  TaipeDay-Trip is a travel e-commerce website,you can browse all attractions or search specific attraction, and make one-day tour reservations.
+</p>
 
 # Demo
 + Website URL：[Taipei-Day-Trip 台北一日遊](http://54.198.160.161:3000/)
@@ -21,6 +19,8 @@
 
 ## Table of Content ##
 + [Tech Stack](#tech-stack)
++ [Frontend Technique](#frontend)
+    + [RWD](#rwd)
 + [Backend Technique](#backend)
     + [Python flask](#python-flask)
     + [API Doc](#API-doc)
@@ -28,8 +28,6 @@
     + [MySQL](#MySQL)
 + [Cloud Service Technique](#cloud)
      + [AWS EC2](#ec2) 
-+ [Frontend Technique](#frontend)
-    + [RWD](#rwd)
 + [Features](#features)
     + [Infinite Scroll](#scroll)
     + [Keyword Search](#keyword-search)
@@ -43,6 +41,15 @@
 <p align="center">
    <img src="https://user-images.githubusercontent.com/94620926/174553333-347477b8-0386-4be2-b81d-2607027ec89a.png" alt="taipeiDay-trip-tech-stack" width= "450" height = "350"/>
 <p/>
+
+<a name="frontend"></a>
+## Frontend Technique
+<a name="rwd"></a>
+### RWD
++ Support desktop, tablet, and mobile devices.
+<p>
+   <img src="https://user-images.githubusercontent.com/94620926/174627568-6b2d05d5-3950-4aa9-ae76-5d5f1904442e.jpeg" alt="taipei_trip_RWD" width= "350" height = "250"/>
+<p/> 
 
 <a name="backend"></a>
 ## Backend Technique
@@ -64,15 +71,6 @@
 ### Cloud Service
 <a name="ec2"></a>
 + AWS EC2 (Ubuntu)   
-
-<a name="frontend"></a>
-## Frontend Technique
-<a name="rwd"></a>
-### RWD
-+ Support desktop, tablet, and mobile devices.
-<p>
-   <img src="https://user-images.githubusercontent.com/94620926/174627568-6b2d05d5-3950-4aa9-ae76-5d5f1904442e.jpeg" alt="taipei_trip_RWD" width= "350" height = "250"/>
-<p/> 
 
 <a name="features"></a>
 ## Features
