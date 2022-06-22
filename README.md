@@ -20,6 +20,7 @@
 ## Table of Content ##
 + [Tech Stack](#tech-stack)
 + [Frontend Technique](#frontend)
+    + [AJAX](#ajax)
     + [RWD](#rwd)
 + [Backend Technique](#backend)
     + [Python flask](#python-flask)
@@ -44,12 +45,16 @@
 
 <a name="frontend"></a>
 ## Frontend Technique
+<a name="ajax"></a>
+### AJAX
++ Fetch data from database using AJAX.
 <a name="rwd"></a>
 ### RWD
 + Support desktop, tablet, and mobile devices.
 <p>
    <img src="https://user-images.githubusercontent.com/94620926/174627568-6b2d05d5-3950-4aa9-ae76-5d5f1904442e.jpeg" alt="taipei_trip_RWD" width= "350" height = "250"/>
 <p/> 
+
 
 <a name="backend"></a>
 ## Backend Technique
