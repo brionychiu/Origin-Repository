@@ -63,7 +63,11 @@
 <a name="python-flask"></a>
 + Python Flask
 <a name="API-doc"></a>
-+ [API Doc](https://app.swaggerhub.com/apis-docs/padax/taipei-trip/1.0.0)
++ API Doc
+<p>
+  <img src="https://user-images.githubusercontent.com/94620926/175563898-e05b67cd-d8ea-4a1b-96ed-b2c4bb3ea11b.png" alt="api doc" width= "700" height = "320"/>
+</p>
+
 <a name="database"></a>
 ### Database
 <a name="MySQL"></a>
