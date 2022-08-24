@@ -5,7 +5,7 @@
 </p>
 
 # Demo
-+ Website URL：[Taipei-Day-Trip 台北一日遊](http://54.198.160.161:3000/)
++ Website ：Taipei-Day-Trip 台北一日遊
 + Test account：`123@mail.com`  Password：`123`
 + Test credit card
     - Card Number: 4242 4242 4242 4242
