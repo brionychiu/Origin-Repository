@@ -50,7 +50,7 @@ function loadFetch(url){
 const keyword_btn = document.querySelector(".srh_attr_btn")
 keyword_btn.addEventListener("click" ,() =>{
   keyword_value=document.getElementById("keyword_value").value;
-  let url=`http://54.198.160.161:3000/api/attractions?page=0&keyword=${keyword_value}`;
+  let url=`http://52.193.5.176:3000/api/attractions?page=0&keyword=${keyword_value}`;
   document.querySelector("main").innerHTML="";
   keywordFetch(url);
 })
@@ -131,10 +131,10 @@ function loadMore(){
     return;
   }
   if (keyword_value && pending==false){
-      let url=`http://54.198.160.161:3000/api/attractions?page=${nextPage}&keyword=${keyword_value}`;
+      let url=`http://52.193.5.176:3000/api/attractions?page=${nextPage}&keyword=${keyword_value}`;
       keywordFetch(url);
     }else if(nextPage && pending==false){
-      let url=`http://54.198.160.161:3000/api/attractions?page=${nextPage}`;
+      let url=`http://52.193.5.176:3000/api/attractions?page=${nextPage}`;
       // console.log(pending);
       loadFetch(url);
     }
