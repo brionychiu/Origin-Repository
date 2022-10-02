@@ -3,14 +3,13 @@ let order_url = location.href;
 let orderNumber = order_url.split("=")[1];
 
 // initial load //
-const alert_close_btn = document.querySelector(".alert_close_btn");
 window.onload = function(){
     checkOrder(orderNumber);
     // show gif //
     document.querySelector(".giphy-embed").style.display = "grid";
     document.querySelector(".alert_box").style.display = "grid";
     document.querySelector(".alert_text").textContent = "訂購成功，歡迎繼續選購";
-    alert_close_btn.addEventListener("click", close_alert , false);
+    document.querySelector(".alert_close_btn").addEventListener("click", close_alert , false);
 }
 async function checkOrder(){
     await checkUser();
